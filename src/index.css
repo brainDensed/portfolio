@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Default midnight theme colors */
+    --background: linear-gradient(to right, #1e1e2f, #3b0e67); /* Darker gradient */
+    --foreground: #ffffff; /* White text */
+    --primary: #5a5a5a; /* Grey for borders, etc. */
+    --border: #444; /* Darker border color */
+  }
+
+  .dark {
+    /* Dark mode colors */
+    --background: linear-gradient(to right, #1e1e2f, #3b0e67);
+    --foreground: #ffffff; /* White text */
+  }
+
+  body {
+    @apply text-foreground;
+    background: var(--background);
+    background-attachment: fixed; /* Ensure gradient stays static */
+  }
+
+  /* Additional styling for consistent border color */
+  * {
+    @apply border-border;
+  }
+}
