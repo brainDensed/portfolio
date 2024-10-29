@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Particles from "./components/ui/particles";
 import TextRevealByWord from "./components/ui/text-reveal";
