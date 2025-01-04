@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dark mode styles */
+body {
+  @apply bg-dark-bg text-dark-text;
+}
+
+.navbar-dark {
+  @apply bg-dark-primary;
+}
+
+.navbar-dark ul {
+  @apply text-dark-text;
+}
+
+.cursor-gradient {
+  background: radial-gradient(circle, rgb(186, 255, 130) 0%, rgb(39, 196, 0) 100%);
+}
+
+/* Ensure sections take full height */
+section {
+  min-height: 100vh;
+  padding-top: 4rem; /* Adjust this value based on the height of your navbar */
+  position: relative;
+  z-index: 10;
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #1a202c inset !important; /* Adjust the color to match your dark mode background */
+  -webkit-text-fill-color: #e2e8f0 !important; /* Adjust the text color to match your dark mode text color */
+}
+.mirror-effect {
+  transform: scaleY(-1); /* Flips text vertically */
+  color: transparent;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+  -webkit-background-clip: text;
+  text-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
+  opacity: 0.4;
+  margin-top: -10px; /* Adjust spacing between text and its reflection */
+}
