@@ -59,7 +59,7 @@ const Contact = () => {
             </label>
             <input
               {...register("name", { required: true })}
-              className="w-full p-2 border rounded bg-gray-800 border-gray-600 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#06d46c] focus:border-transparent"
+              className="w-full p-2 border rounded glass border-gray-600 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#456572] focus:border-transparent"
             />
             {errors.name && (
               <span className="text-red-400">This field is required</span>
@@ -71,7 +71,7 @@ const Contact = () => {
             </label>
             <input
               {...register("email", { required: true })}
-              className="w-full p-2 border rounded bg-gray-800 border-gray-600 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#06d46c] focus:border-transparent"
+              className="w-full p-2 border rounded glass border-gray-600 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#456572] focus:border-transparent"
             />
             {errors.email && (
               <span className="text-red-400">This field is required</span>
@@ -83,7 +83,7 @@ const Contact = () => {
             </label>
             <textarea
               {...register("message", { required: true })}
-              className="w-full p-2 border rounded bg-gray-800 border-gray-600 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#06d46c] focus:border-transparent"
+              className="w-full p-2 border rounded glass border-gray-600 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#456572] focus:border-transparent"
             />
             {errors.message && (
               <span className="text-red-400">This field is required</span>
@@ -91,7 +91,7 @@ const Contact = () => {
           </div>
           <motion.button
             type="submit"
-            className="px-4 py-2 bg-[#06d46c] text-white rounded transition-colors duration-300"
+            className="px-6 py-3 rounded-md glass text-white text-lg font-medium"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >

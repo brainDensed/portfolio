@@ -31,7 +31,7 @@ const Skills = () => {
               href={skill.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="block p-4 bg-gray-800 text-gray-300 rounded-lg shadow-lg hover:bg-gray-700 transition-colors duration-300"
+              className="block p-4 glass text-gray-300 rounded-lg shadow-lg transition-colors duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

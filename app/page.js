@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="relative overflow-hidden bg-gray-900 text-white min-h-screen flex flex-col justify-between">
+    <div className="relative overflow-hidden min-h-screen flex flex-col justify-between">
       {/* Hero Section */}
       <header
         className="flex flex-col items-center justify-center flex-grow text-center"
@@ -33,7 +33,7 @@ export default function Home() {
 
           {/* Designation */}
           <motion.p
-            className="mt-4 text-2xl text-gray-300"
+            className="mt-4 text-2xl"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
@@ -47,7 +47,7 @@ export default function Home() {
               href="/Shivam_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 bg-gray-800 rounded-md hover:bg-gray-700 text-white text-lg font-medium"
+              className="px-6 py-3 rounded-md glass text-white text-lg font-medium"
               whileHover={{ scale: 1.1 }}
             >
               Download Resume
@@ -57,8 +57,8 @@ export default function Home() {
       </header>
 
       {/* Footer */}
-      <footer className="py-10 text-center bg-gray-900">
-        <p className="text-gray-500">
+      <footer className="py-10 text-center">
+        <p className="text-gray-300">
           © {new Date().getFullYear()} Shivam. All rights reserved.
         </p>
       </footer>
