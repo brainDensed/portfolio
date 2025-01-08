@@ -63,13 +63,13 @@ export default function RootLayout({ children }) {
         </AnimatePresence>
 
         {/* Navigation Buttons */}
-        <div className="fixed glass bottom-10 right-10 flex space-x-4 z-50">
+        <div className="fixed glass bottom-10 right-10 flex space-x-4 z-10">
           {/* Previous Button */}
           <motion.button
             className={`p-4 ${
               currentIndex === 0
                 ? "bg-gray-500 cursor-not-allowed"
-                : "bg-[#2a3f5d] text-white shadow-lg hover:scale-105"
+                : "bg-[#305d9b] text-white shadow-lg hover:scale-105"
             } text-white rounded-full`}
             whileHover={{ scale: currentIndex > 0 ? 1.2 : 1 }}
             whileTap={{ scale: currentIndex > 0 ? 0.9 : 1 }}
@@ -85,7 +85,7 @@ export default function RootLayout({ children }) {
             className={`p-4 ${
               currentIndex === sections.length - 1
                 ? "bg-gray-500 cursor-not-allowed"
-                : "bg-[#2a3f5d] text-white shadow-lg hover:scale-105"
+                : "bg-[#305d9b] text-white shadow-lg hover:scale-105"
             } text-white rounded-full`}
             whileHover={{ scale: currentIndex < sections.length - 1 ? 1.2 : 1 }}
             whileTap={{ scale: currentIndex < sections.length - 1 ? 0.9 : 1 }}

@@ -38,8 +38,8 @@ const Cursor = () => {
   return (
     <motion.div
       className={`fixed top-0 left-0 w-20 h-20 rounded-full pointer-events-none z-50 cursor-mirror ${isHidden ? "hidden" : ""}`}
-      style={{ x: cursorPosition.x - 50, y: cursorPosition.y - 50 }} // Adjust to center the cursor
-      animate={{ x: cursorPosition.x - 50, y: cursorPosition.y - 50 }} // Adjust to center the cursor
+      style={{ x: cursorPosition.x - 20, y: cursorPosition.y - 20 }} // Adjust to center the cursor
+      animate={{ x: cursorPosition.x - 20, y: cursorPosition.y - 20 }} // Adjust to center the cursor
       transition={{ type: "spring", stiffness: 1000, damping: 30 }}
     >
       <div className="w-full h-full transform bg-transparent"></div>

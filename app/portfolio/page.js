@@ -16,9 +16,8 @@ const Portfolio = () => {
         {/* Image Section */}
         <div className="col-span-1 flex justify-center">
           <Image
-            src="/coder.png"
+            src="/images/coder.png"
             alt="Portfolio Illustration"
-            layout="intrinsic"
             width={500}
             height={300}
             className="rounded-lg shadow-md"
