@@ -18,6 +18,7 @@ body {
 .cursor-gradient {
   background: radial-gradient(circle, rgb(62, 159, 255) 0%, rgb(0, 22, 28) 100%);
 }
+
 /* Ensure sections take full height */
 section {
   min-height: 100vh;
@@ -56,8 +57,13 @@ textarea:-webkit-autofill {
 body {
   background: radial-gradient(circle, rgb(3 53 121), rgb(0 0 0), rgb(133 133 133));
   min-height: 100vh;
-  overflow: hidden;
+  overflow-y: auto; /* Ensure vertical scrolling */
   position: relative;
+  scrollbar-width: none;
+  scrollbar-arrow-color: red;
+}
+html {
+  overflow-y: auto; /* Ensure vertical scrolling */
 }
 @layer base {
   :root {

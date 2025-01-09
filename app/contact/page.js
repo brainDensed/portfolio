@@ -48,7 +48,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative flex items-center justify-center min-h-screen w-full p-8 z-10"
+      className="relative flex items-center justify-center h-[100vh] w-full p-8 z-10"
     >
       <div className="relative glass p-6 rounded-md w-full max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold dark:text-white mb-4">Contact</h2>

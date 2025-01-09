@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="relative overflow-hidden min-h-screen flex flex-col justify-between">
+    <div className="relative min-h-screen flex flex-col justify-between">
       {/* Hero Section */}
       <header
         className="flex flex-col items-center justify-center flex-grow text-center"

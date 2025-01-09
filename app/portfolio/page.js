@@ -2,12 +2,12 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { BarChartComponent } from "../components/charts/BarChart";
+import SkillsMural from "../components/SkillsMural/SkillsMural";
 
 const Portfolio = () => {
   return (
     <motion.section
-      className="relative flex flex-col items-center justify-center min-h-screen w-full px-4 lg:px-8 py-8 overflow-y-auto"
+      className="relative flex flex-col items-center justify-center w-full px-4 lg:px-8 py-8 overflow-y-auto"
       initial={{ opacity: 0, x: -100 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8 }}
@@ -26,7 +26,7 @@ const Portfolio = () => {
 
         {/* Bar Chart Section */}
         <div className="col-span-1 flex justify-center">
-          <BarChartComponent />
+          <SkillsMural />
         </div>
       </div>
     </motion.section>

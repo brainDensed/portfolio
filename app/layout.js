@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter, usePathname } from "next/navigation";
 import Cursor from "./components/Cursor";
 import { ArrowLeft, ArrowRight } from "./components/icons/Icons";
+import { useEffect, useState } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,6 +18,12 @@ const geistMono = Geist_Mono({
 });
 
 export default function RootLayout({ children }) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // Set to true once client-side rendering starts
+  }, []);
+
   const sections = [
     { name: "Home", route: "/" },
     { name: "About", route: "/about" },
@@ -44,10 +51,15 @@ export default function RootLayout({ children }) {
     }
   };
 
+  if (!isClient) {
+    return null; // Render nothing on the server-side during the initial render
+  }
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{ overflowX: "hidden", minHeight: "100vh" }} // Ensure full height and no horizontal overflow
       >
         <Cursor />
 
@@ -57,6 +69,7 @@ export default function RootLayout({ children }) {
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
+            style={{ minHeight: "100vh", overflowY: "auto" }} // Ensure content can scroll vertically
           >
             {children}
           </motion.div>
