@@ -59,12 +59,14 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <head>
+        <title>Portfolio</title>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         style={{ overflowX: "hidden", minHeight: "100vh" }} // Ensure full height and no horizontal overflow
       >
         <Cursor />
-
         <AnimatePresence mode="wait">
           <motion.div
             key={pathname}
@@ -76,7 +78,6 @@ export default function RootLayout({ children }) {
             {children}
           </motion.div>
         </AnimatePresence>
-
         {/* Navigation Buttons */}
         <div className="fixed glass bottom-10 right-10 flex space-x-4 z-10">
           {/* Previous Button */}
