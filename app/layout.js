@@ -35,7 +35,9 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
 
   // Get the index of the current section
-  const currentIndex = sections.findIndex((section) => section.route === pathname);
+  const currentIndex = sections.findIndex(
+    (section) => section.route === pathname
+  );
 
   // Function to navigate to the next section
   const goToNext = () => {
