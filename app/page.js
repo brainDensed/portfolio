@@ -44,7 +44,7 @@ export default function Home() {
           {/* Call-to-Actions */}
           <div className="mt-8 flex justify-center space-x-4">
             <motion.a
-              href="/Shivam_Resume.pdf"
+              href="/Shivams_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 rounded-md glass text-white text-lg font-medium"
