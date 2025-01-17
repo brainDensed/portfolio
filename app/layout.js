@@ -38,10 +38,18 @@ export default function RootLayout({ children }) {
   const currentIndex = sections.findIndex(
     (section) => section.route === pathname
   );
+  const clickSound = new Audio("/sounds/Switch.mp3");
+
+  // Function to play the sound
+  const playSound = () => {
+    clickSound.currentTime = 0; // Reset the sound to the beginning
+    clickSound.play();
+  };
 
   // Function to navigate to the next section
   const goToNext = () => {
     if (currentIndex < sections.length - 1) {
+      playSound();
       router.push(sections[currentIndex + 1].route);
     }
   };
@@ -49,6 +57,7 @@ export default function RootLayout({ children }) {
   // Function to navigate to the previous section
   const goToPrevious = () => {
     if (currentIndex > 0) {
+      playSound();
       router.push(sections[currentIndex - 1].route);
     }
   };
