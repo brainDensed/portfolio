@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter, usePathname } from "next/navigation";
 import Cursor from "./components/Cursor";
 import { ArrowLeft, ArrowRight } from "./components/icons/Icons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,6 +19,9 @@ const geistMono = Geist_Mono({
 
 export default function RootLayout({ children }) {
   const [isClient, setIsClient] = useState(false);
+  const clickSound = useRef(
+    typeof Audio !== "undefined" ? new Audio("/sounds/Switch.mp3") : undefined
+  );
 
   useEffect(() => {
     setIsClient(true); // Set to true once client-side rendering starts
@@ -38,12 +41,11 @@ export default function RootLayout({ children }) {
   const currentIndex = sections.findIndex(
     (section) => section.route === pathname
   );
-  const clickSound = new Audio("/sounds/Switch.mp3");
 
   // Function to play the sound
   const playSound = () => {
-    clickSound.currentTime = 0; // Reset the sound to the beginning
-    clickSound.play();
+    clickSound.current.currentTime = 0; // Reset the sound to the beginning
+    clickSound.current.play();
   };
 
   // Function to navigate to the next section
