@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 export default function RootLayout({ children }) {
   const [isClient, setIsClient] = useState(false);
   const clickSound = useRef(
-    typeof Audio !== "undefined" ? new Audio("/sounds/Switch.mp3") : undefined
+    typeof Audio !== "undefined" ? new Audio("/sounds/Smash.mp3") : undefined
   );
 
   useEffect(() => {
