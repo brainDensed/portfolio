@@ -19,9 +19,6 @@ const geistMono = Geist_Mono({
 
 export default function RootLayout({ children }) {
   const [isClient, setIsClient] = useState(false);
-  const clickSound = useRef(
-    typeof Audio !== "undefined" ? new Audio("/sounds/Smash.mp3") : undefined
-  );
 
   useEffect(() => {
     setIsClient(true); // Set to true once client-side rendering starts
@@ -42,16 +39,10 @@ export default function RootLayout({ children }) {
     (section) => section.route === pathname
   );
 
-  // Function to play the sound
-  const playSound = () => {
-    clickSound.current.currentTime = 0; // Reset the sound to the beginning
-    clickSound.current.play();
-  };
 
   // Function to navigate to the next section
   const goToNext = () => {
     if (currentIndex < sections.length - 1) {
-      playSound();
       router.push(sections[currentIndex + 1].route);
     }
   };
@@ -59,7 +50,6 @@ export default function RootLayout({ children }) {
   // Function to navigate to the previous section
   const goToPrevious = () => {
     if (currentIndex > 0) {
-      playSound();
       router.push(sections[currentIndex - 1].route);
     }
   };
