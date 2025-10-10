@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaReact, FaNodeJs, FaGitAlt, FaGithub, FaEthereum, FaHammer } from "react-icons/fa";
-import { SiVite, SiNextdotjs, SiTailwindcss, SiRedux, SiMui, SiSolidity, SiWeb3Dotjs, SiIpfs, SiChainlink } from "react-icons/si";
+import { FaReact, FaGitAlt, FaGithub, FaEthereum, FaHammer } from "react-icons/fa";
+import { SiNextdotjs, SiTailwindcss, SiRedux, SiSolidity, SiWeb3Dotjs, SiIpfs, SiChainlink } from "react-icons/si";
 
 const technologies = [
   { name: "Solidity", icon: <SiSolidity className="text-4xl text-gray-400" /> },
