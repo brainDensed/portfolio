@@ -2,65 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark mode styles */
+/* Material 3 inspired styles with iOS-like boxy design */
 body {
   @apply text-dark-text;
 }
 
-.navbar-dark {
-  @apply bg-dark-primary;
+/* Modern navbar */
+.navbar {
+  @apply bg-white/10 backdrop-blur-lg border-b border-white/20;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-dark ul {
-  @apply text-dark-text;
+.navbar ul {
+  @apply text-white;
 }
 
-.cursor-gradient {
-  background: radial-gradient(circle, rgb(62, 159, 255) 0%, rgb(0, 22, 28) 100%);
+/* Material 3 cursor */
+.cursor-material {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
 }
 
 /* Ensure sections take full height */
 section {
   min-height: 100vh;
-  padding-top: 4rem; /* Adjust this value based on the height of your navbar */
+  padding-top: 4rem;
   position: relative;
   z-index: 10;
 }
 
-/* Glassmorphism effect */
-.glass {
+/* Material 3 card design */
+.material-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.material-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+}
+
+/* iOS-like button */
+.ios-button {
+  @apply px-6 py-3 rounded-xl font-medium text-white;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.ios-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+input, textarea {
+  @apply text-white bg-white/10 border border-white/20 rounded-lg px-4 py-2;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+input::placeholder, textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 input:-webkit-autofill,
 textarea:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px #becce8 inset !important; /* Adjust the color to match your dark mode background */
-  -webkit-text-fill-color: #010101 !important; /* Adjust the text color to match your dark mode text color */
+  -webkit-box-shadow: 0 0 0 30px rgba(30, 41, 59, 0.8) inset !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
 .mirror-effect {
-  transform: scaleY(-1); /* Flips text vertically */
+  transform: scaleY(-1);
   color: transparent;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
   -webkit-background-clip: text;
   text-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px;
   opacity: 0.4;
-  margin-top: -10px; /* Adjust spacing between text and its reflection */
+  margin-top: -10px;
 }
 
-/* Gradient background */
+/* Modern gradient background */
 body {
-  background: radial-gradient(circle, rgb(3 53 121), rgb(0 0 0), rgb(133 133 133));
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
   min-height: 100vh;
   overflow-y: auto; /* Ensure vertical scrolling */
   position: relative;
   scrollbar-width: none;
-  scrollbar-arrow-color: red;
 }
 html {
   overflow-y: auto; /* Ensure vertical scrolling */

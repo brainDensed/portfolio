@@ -79,14 +79,44 @@ export default function RootLayout({ children }) {
             {children}
           </motion.div>
         </AnimatePresence>
+        
+        {/* Modern Navigation Bar */}
+        <motion.nav 
+          className="fixed top-0 left-0 right-0 navbar z-50 px-6 py-4"
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        >
+          <div className="flex justify-between items-center max-w-7xl mx-auto">
+            <motion.div 
+              className="text-2xl font-bold"
+              whileHover={{ scale: 1.05 }}
+            >
+              Shivam
+            </motion.div>
+            <ul className="flex space-x-8">
+              {sections.map((section) => (
+                <motion.li key={section.name} whileHover={{ scale: 1.1 }}>
+                  <a 
+                    href={section.route}
+                    className={`text-lg ${pathname === section.route ? 'text-blue-400 font-bold' : 'text-white'}`}
+                  >
+                    {section.name}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+        </motion.nav>
+
         {/* Navigation Buttons */}
-        <div className="fixed glass bottom-10 right-10 flex space-x-4 z-10">
+        <div className="fixed bottom-10 right-10 flex space-x-4 z-10">
           {/* Previous Button */}
           <motion.button
-            className={`p-4 ${
+            className={`p-4 ios-button ${
               currentIndex === 0
-                ? "bg-gray-500 cursor-not-allowed"
-                : "bg-[#305d9b] text-white shadow-lg hover:scale-105"
+                ? "bg-gray-500/50 cursor-not-allowed"
+                : "bg-blue-500/20 text-white hover:bg-blue-600/30"
             } text-white rounded-full`}
             whileHover={{ scale: currentIndex > 0 ? 1.2 : 1 }}
             whileTap={{ scale: currentIndex > 0 ? 0.9 : 1 }}
@@ -99,10 +129,10 @@ export default function RootLayout({ children }) {
 
           {/* Next Button */}
           <motion.button
-            className={`p-4 ${
+            className={`p-4 ios-button ${
               currentIndex === sections.length - 1
-                ? "bg-gray-500 cursor-not-allowed"
-                : "bg-[#305d9b] text-white shadow-lg hover:scale-105"
+                ? "bg-gray-500/50 cursor-not-allowed"
+                : "bg-blue-500/20 text-white hover:bg-blue-600/30"
             } text-white rounded-full`}
             whileHover={{ scale: currentIndex < sections.length - 1 ? 1.2 : 1 }}
             whileTap={{ scale: currentIndex < sections.length - 1 ? 0.9 : 1 }}
