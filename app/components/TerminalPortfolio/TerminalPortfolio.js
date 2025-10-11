@@ -596,50 +596,107 @@ const TerminalPortfolio = () => {
     // Fetch live data
     useEffect(() => {
         const fetchLiveData = async () => {
+            const newLiveData = {
+                github: null,
+                ethPrice: null,
+                location: null,
+                weather: null,
+                totalCommits: null
+            };
+
             try {
                 // GitHub user data
-                const githubRes = await fetch('https://api.github.com/users/brainDensed');
-                const github = await githubRes.json();
+                try {
+                    const githubRes = await fetch('https://api.github.com/users/brainDensed');
+                    if (githubRes.ok) {
+                        newLiveData.github = await githubRes.json();
+                    } else {
+                        console.warn('GitHub API error:', githubRes.status);
+                        newLiveData.github = { error: 'GitHub data unavailable' };
+                    }
+                } catch (error) {
+                    console.warn('GitHub fetch error:', error);
+                    newLiveData.github = { error: 'Unable to fetch GitHub data' };
+                }
 
                 // ETH price in INR
-                const ethRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=inr');
-                const ethData = await ethRes.json();
+                try {
+                    const ethRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=inr');
+                    if (ethRes.ok) {
+                        const ethData = await ethRes.json();
+                        newLiveData.ethPrice = ethData.ethereum?.inr || null;
+                    } else {
+                        console.warn('CoinGecko API error:', ethRes.status);
+                        newLiveData.ethPrice = null;
+                    }
+                } catch (error) {
+                    console.warn('CoinGecko fetch error:', error);
+                    newLiveData.ethPrice = null;
+                }
 
                 // IP and location
-                const locationRes = await fetch('https://ipapi.co/json/');
-                const location = await locationRes.json();
+                try {
+                    const locationRes = await fetch('https://ipapi.co/json/');
+                    if (locationRes.ok) {
+                        newLiveData.location = await locationRes.json();
+                    } else {
+                        console.warn('Location API error:', locationRes.status);
+                        newLiveData.location = { error: 'Location data unavailable' };
+                    }
+                } catch (error) {
+                    console.warn('Location fetch error:', error);
+                    newLiveData.location = { error: 'Unable to detect location' };
+                }
 
-                // Weather data
-                const weatherRes = await fetch(`https://wttr.in/${location.city}?format=j1`);
-                const weatherData = await weatherRes.json();
+                // Weather data (only if location is available)
+                if (newLiveData.location && !newLiveData.location.error) {
+                    try {
+                        const weatherRes = await fetch(`https://wttr.in/${newLiveData.location.city}?format=j1`);
+                        if (weatherRes.ok) {
+                            const weatherData = await weatherRes.json();
+                            newLiveData.weather = weatherData.current_condition ? weatherData.current_condition[0] : null;
+                        } else {
+                            console.warn('Weather API error:', weatherRes.status);
+                            newLiveData.weather = { error: 'Weather data unavailable' };
+                        }
+                    } catch (error) {
+                        console.warn('Weather fetch error:', error);
+                        newLiveData.weather = { error: 'Unable to fetch weather' };
+                    }
+                }
 
                 // Coding time from GitHub events
-                const eventsRes = await fetch('https://api.github.com/users/brainDensed/events');
-                const events = await eventsRes.json();
+                try {
+                    const eventsRes = await fetch('https://api.github.com/users/brainDensed/events');
+                    if (eventsRes.ok) {
+                        const events = await eventsRes.json();
 
-                // Calculate today's coding time
-                const today = new Date().toISOString().split('T')[0];
-                const todayEvents = events.filter(event =>
-                    event.type === 'PushEvent' &&
-                    event.created_at.startsWith(today)
-                );
-                const totalCommits = todayEvents.reduce((sum, event) => sum + event.payload.commits.length, 0);
+                        // Calculate today's coding time
+                        const today = new Date().toISOString().split('T')[0];
+                        const todayEvents = events.filter(event =>
+                            event.type === 'PushEvent' &&
+                            event.created_at.startsWith(today)
+                        );
+                        const totalCommits = todayEvents.reduce((sum, event) => sum + event.payload.commits.length, 0);
+                        newLiveData.totalCommits = totalCommits > 0 ? `(${totalCommits} commits)` : '(No commits today)';
+                    } else {
+                        console.warn('GitHub events API error:', eventsRes.status);
+                        newLiveData.totalCommits = '(Unable to fetch commits)';
+                    }
+                } catch (error) {
+                    console.warn('GitHub events fetch error:', error);
+                    newLiveData.totalCommits = '(Unable to fetch commits)';
+                }
 
-                setLiveData({
-                    github,
-                    ethPrice: ethData.ethereum?.inr || null,
-                    location,
-                    weather: weatherData.current_condition ? weatherData.current_condition[0] : null,
-                    totalCommits: `(${totalCommits} commits)`
-                });
+                setLiveData(newLiveData);
             } catch (error) {
-                console.error('Error fetching live data:', error);
+                console.error('General error fetching live data:', error);
                 setLiveData({
-                    github: null,
+                    github: { error: 'Service temporarily unavailable' },
                     ethPrice: null,
-                    location: null,
-                    weather: null,
-                    totalCommits: null
+                    location: { error: 'Service temporarily unavailable' },
+                    weather: { error: 'Service temporarily unavailable' },
+                    totalCommits: '(Service unavailable)'
                 });
             } finally {
                 setIsLoadingData(false);
@@ -757,11 +814,11 @@ ${isLoadingData ? 'Loading live data...' : `
 Initializing Shivam System...
 Fetching live data...
 -------------------------------------
-Username: @${liveData.github?.login || 'brainDensed'}
-GitHub Repos: ${liveData.github?.public_repos || '12'} | Followers: ${liveData.github?.followers || '34'}
-ETH: ₹${liveData.ethPrice ? liveData.ethPrice.toLocaleString('en-IN') : '2,72,845'} | Weather: ${liveData.location?.city || 'Delhi'} ${liveData.weather?.weatherDesc?.[0]?.value || '☀️'} ${liveData.weather?.temp_C || '29'}°C
-IP: ${liveData.location?.ip || '103.211.50.32'} | Location: ${liveData.location?.city || 'Bangalore'}, ${liveData.location?.country_name || 'IN'}
-Total Commits (Today): ${liveData.totalCommits}
+Username: @${liveData.github?.login || (liveData.github?.error ? 'Service unavailable' : 'Loading GitHub info...')}
+GitHub Repos: ${liveData.github?.public_repos ? liveData.github.public_repos : (liveData.github?.error ? 'Data unavailable' : 'Loading...')} | Followers: ${liveData.github?.followers ? liveData.github.followers : (liveData.github?.error ? 'Data unavailable' : 'Loading...')}
+ETH: ₹${liveData.ethPrice ? liveData.ethPrice.toLocaleString('en-IN') : 'Price unavailable'} | Weather: ${liveData.location?.city && liveData.weather && !liveData.weather.error ? `${liveData.location.city} ${liveData.weather.weatherDesc?.[0]?.value || '☀️'} ${liveData.weather.temp_C}°C` : (liveData.weather?.error ? 'Weather unavailable' : 'Loading weather...')}
+IP: ${liveData.location?.ip || (liveData.location?.error ? 'Detection failed' : 'Detecting location...')} | Location: ${liveData.location?.city && liveData.location?.country_name && !liveData.location.error ? `${liveData.location.city}, ${liveData.location.country_name}` : (liveData.location?.error ? 'Location unavailable' : 'Loading location...')}
+Total Commits (Today): ${liveData.totalCommits || 'Loading commits...'}
 Target Package: ₹15+ LPA
 -------------------------------------
 `}
