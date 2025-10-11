@@ -4,7 +4,7 @@ import React, { useState, useCallback, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../../contexts/ThemeContext";
 
-const SkillTree = () => {
+const SkillTree = ({ isGUI = false }) => {
   const [selectedNode, setSelectedNode] = useState(null);
   const { getCurrentThemeInfo } = useTheme();
 
@@ -136,7 +136,7 @@ const SkillTree = () => {
           transition={{ delay: 1.5 }}
         >
           <div className="text-xs text-gray-300">
-            Press <span className="text-green-400 font-bold">ESC</span> to return to terminal
+            Press <span className="text-green-400 font-bold">ESC</span> to return to {isGUI ? 'GUI' : 'terminal'}
           </div>
         </motion.div>
       </div>

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const MatrixRain = ({ isActive, onClose }) => {
+const MatrixRain = ({ isActive, onClose, isGUI = false }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const MatrixRain = ({ isActive, onClose }) => {
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="text-green-400 text-center font-mono">
           <h1 className="text-4xl mb-4 animate-pulse">WELCOME TO THE MATRIX</h1>
-          <p className="text-lg">Click anywhere to return to terminal</p>
+          <p className="text-lg">Click anywhere to return to {isGUI ? 'GUI' : 'terminal'}</p>
         </div>
       </div>
     </div>

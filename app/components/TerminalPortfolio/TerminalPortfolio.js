@@ -19,7 +19,7 @@ const TerminalPortfolio = () => {
     const inputRef = useRef(null);
     const terminalRef = useRef(null);
     const { changeTheme, getAvailableThemes, getCurrentThemeInfo } = useTheme();
-    const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
+    const [currentTime, setCurrentTime] = useState('');
     const [liveData, setLiveData] = useState({
         github: null,
         ethPrice: null,
@@ -57,6 +57,7 @@ const TerminalPortfolio = () => {
                 "  easter        - ???",
                 "  theme         - Change terminal theme",
                 "  themes        - List available themes",
+                "  gui           - Switch to modern GUI interface",
                 "",
                 "Keyboard shortcuts:",
                 "  ↑/↓           - Navigate command history",
@@ -128,7 +129,10 @@ const TerminalPortfolio = () => {
         }),
         // ... existing code for other commands ...
         skills: () => {
-            setTimeout(() => setShowSkillTree(true), 500);
+            setTimeout(() => {
+                setShowSkillTree(true);
+                window.dispatchEvent(new CustomEvent('skillTreeToggle', { detail: { active: true } }));
+            }, 500);
             return {
                 output: [
                     "🎮 Loading Skill Tree Interface...",
@@ -196,7 +200,7 @@ const TerminalPortfolio = () => {
                 "",
                 "Aug 2019 - Aug 2023  🎓 Bachelor of Technology",
                 "JECRC University, Jaipur, Rajasthan",
-                "                     └── Computer Science and Engineering",
+                "                     └── Computer Science & Engineering",
                 "                     └── Built strong foundation in algorithms & DS",
                 "                     └── Specialized in web technologies",
                 "",
@@ -216,7 +220,7 @@ const TerminalPortfolio = () => {
                 "",
                 "🕐 Timezone: IST (UTC+5:30)",
                 "🌐 Availability: Remote • Hybrid • On-site",
-                "   LinkedIn for professional networking",
+                "💼 Preferred: Professional networking platforms",
                 "🏆 Notable: Award winner"
             ]
         }),
@@ -540,12 +544,28 @@ const TerminalPortfolio = () => {
                 output: [
                     "🎨 AVAILABLE THEMES:",
                     "",
-                    ...availableThemes.map(theme => 
+                    ...availableThemes.map(theme =>
                         `  ${theme.key.padEnd(12)} - ${theme.name}: ${theme.description}`
                     ),
                     "",
                     "Usage: theme <theme-name>",
                     "Example: theme cyberpunk"
+                ]
+            };
+        },
+        gui: () => {
+            // This command will be handled by the parent component
+            window.dispatchEvent(new CustomEvent('switchToGUI'));
+            return {
+                output: [
+                    "🖼️  Switching to GUI Mode...",
+                    "",
+                    "████████████████████████████████ 100%",
+                    "",
+                    "✨ Modern Interface Activated!",
+                    "Use the floating button to return to terminal mode.",
+                    "",
+                    "Loading visual portfolio..."
                 ]
             };
         }
@@ -563,7 +583,10 @@ const TerminalPortfolio = () => {
         }
     }, [history]);
 
+    // Initialize current time on client side only to prevent hydration mismatch
     useEffect(() => {
+        setCurrentTime(new Date().toLocaleTimeString());
+
         const timer = setInterval(() => {
             setCurrentTime(new Date().toLocaleTimeString());
         }, 1000);
@@ -644,9 +667,15 @@ const TerminalPortfolio = () => {
 
             // ESC to close modals
             if (e.key === 'Escape') {
+                const wasSkillTreeOpen = showSkillTree;
                 setShowMatrix(false);
                 setShowSkillTree(false);
                 setShowCard(false);
+
+                // Notify parent if SkillTree was closed
+                if (wasSkillTreeOpen) {
+                    window.dispatchEvent(new CustomEvent('skillTreeToggle', { detail: { active: false } }));
+                }
             }
         };
 
@@ -660,7 +689,7 @@ const TerminalPortfolio = () => {
             <HolographicCard isVisible={showCard} onClose={() => setShowCard(false)} />
             {showSkillTree && (
                 <div className="fixed inset-0 z-40 bg-black/95">
-                    <SkillTree />
+                    <SkillTree isGUI={false} />
                 </div>
             )}
 

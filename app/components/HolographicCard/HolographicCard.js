@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const HolographicCard = ({ isVisible, onClose }) => {
+const HolographicCard = ({ isVisible, onClose, isGUI = false }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   // Reset flip when modal closes
@@ -86,11 +86,11 @@ const HolographicCard = ({ isVisible, onClose }) => {
               <div className="space-y-3 text-sm">
                 <div className="flex items-center space-x-3">
                   <span className="text-green-400">📧</span>
-                  <span className="text-green-300">shivam.nilay46@gmail.com</span>
+                  <span className="text-green-300">Contact via LinkedIn</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <span className="text-green-400">📞</span>
-                  <span className="text-green-300">+91 8789581642</span>
+                  <span className="text-green-300">Available for opportunities</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <span className="text-green-400">🔗</span>
