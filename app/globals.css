@@ -434,3 +434,16 @@ body {
 .bg-theme-surface {
   background-color: var(--theme-surface);
 }
+
+.bg-theme-primary {
+  background-color: var(--theme-primary);
+}
+
+.bg-theme-accent {
+  background-color: var(--theme-accent);
+}
+
+/* Theme-aware gradients */
+.bg-gradient-theme {
+  background: linear-gradient(to right, var(--theme-primary), var(--theme-accent));
+}

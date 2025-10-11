@@ -10,13 +10,16 @@ import { useTheme } from "../../contexts/ThemeContext";
 const TerminalPortfolio = () => {
     const [input, setInput] = useState("");
     const [history, setHistory] = useState([]);
+    const [commandHistory, setCommandHistory] = useState([]);
+    const [historyIndex, setHistoryIndex] = useState(-1);
     const [currentPath, setCurrentPath] = useState("~");
     const [showMatrix, setShowMatrix] = useState(false);
     const [showSkillTree, setShowSkillTree] = useState(false);
     const [showCard, setShowCard] = useState(false);
     const inputRef = useRef(null);
     const terminalRef = useRef(null);
-    const { currentTheme, changeTheme, getAvailableThemes, getCurrentThemeInfo } = useTheme();
+    const { changeTheme, getAvailableThemes, getCurrentThemeInfo } = useTheme();
+    const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
 
     const commands = {
         help: () => ({
@@ -41,9 +44,18 @@ const TerminalPortfolio = () => {
                 "  web3          - Explore Web3 achievements",
                 "  hackathon     - Hackathon victory details",
                 "  competitive   - Competitive programming stats",
+                "  date          - Show current date and time",
+                "  shortcuts     - Show keyboard shortcuts",
                 "  easter        - ???",
                 "  theme         - Change terminal theme",
                 "  themes        - List available themes",
+                "",
+                "Keyboard shortcuts:",
+                "  ↑/↓           - Navigate command history",
+                "  Tab           - Auto-complete commands",
+                "  Ctrl+C        - Clear current input",
+                "  Ctrl+L        - Clear terminal screen",
+                "  ESC           - Close overlays",
                 "",
                 "Type any command to get started!"
             ]
@@ -63,6 +75,50 @@ const TerminalPortfolio = () => {
                 "╚════════════════════════════════════════════════════════════════════╝"
             ]
         }),
+        shortcuts: () => ({
+            output: [
+                "⌨️  KEYBOARD SHORTCUTS:",
+                "",
+                "╔═══════════════════════════════════════════════════════════╗",
+                "║                    TERMINAL NAVIGATION                    ║",
+                "╠═══════════════════════════════════════════════════════════╣",
+                "║ ↑ / ↓ Arrow Keys  - Navigate command history              ║",
+                "║ Tab               - Auto-complete commands                ║",
+                "║ Ctrl + C          - Clear current input line              ║",
+                "║ Ctrl + L          - Clear terminal screen                 ║",
+                "║ ESC               - Close overlays/modals                 ║",
+                "║ Enter             - Execute command                       ║",
+                "╚═══════════════════════════════════════════════════════════╝",
+                "",
+                "🎮 SPECIAL FEATURES:",
+                "• Konami Code: ↑↑↓↓←→←→BA (unlocks easter egg)",
+                "• Text Selection: Click and drag to select/copy text",
+                "",
+                "💡 PRO TIPS:",
+                "• Use Tab for quick command completion",
+                "• Arrow keys work just like a real terminal",
+                "• Ctrl+L is faster than typing 'clear'",
+                "• All text in the terminal is selectable and copyable"
+            ]
+        }),
+        date: () => ({
+            output: [
+                `📅 ${new Date().toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                })}`,
+                `🕐 ${new Date().toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    timeZoneName: 'short'
+                })}`,
+                `🌍 UTC: ${new Date().toISOString().slice(0, 19).replace('T', ' ')}`
+            ]
+        }),
+        // ... existing code for other commands ...
         skills: () => {
             setTimeout(() => setShowSkillTree(true), 500);
             return {
@@ -78,6 +134,7 @@ const TerminalPortfolio = () => {
                 ]
             };
         },
+        // ... rest of existing commands remain the same ...
         projects: () => ({
             output: [
                 "📁 PROJECT DIRECTORY:",
@@ -115,6 +172,7 @@ const TerminalPortfolio = () => {
                 "Type 'cat <project-name>' for detailed info"
             ]
         }),
+        // ... continue with all other existing commands ...
         experience: () => ({
             output: [
                 "💼 CAREER TIMELINE:",
@@ -201,7 +259,7 @@ const TerminalPortfolio = () => {
                 "🚨 ACCESS GRANTED 🚨",
                 "",
                 "CLASSIFIED: SHIVAM'S SECRET ABILITIES",
-                "══════════════��════════════════════",
+                "══════════════════════════════════",
                 "• Can debug production issues in sleep",
                 "• Writes code that actually works on first try",
                 "• Understands CSS centering without Stack Overflow",
@@ -497,6 +555,13 @@ const TerminalPortfolio = () => {
         }
     }, [history]);
 
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentTime(new Date().toLocaleTimeString());
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
+
     // Konami Code Easter Egg
     useEffect(() => {
         const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
@@ -525,8 +590,6 @@ const TerminalPortfolio = () => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, []);
 
-
-
     return (
         <>
             <MatrixRain isActive={showMatrix} onClose={() => setShowMatrix(false)} />
@@ -554,12 +617,12 @@ const TerminalPortfolio = () => {
                                 <div className="text-theme-accent text-xs">Frontend + Web3</div>
                             </div>
                             <div className="flex items-center gap-4">
-                                <div className="hidden md:block text-theme-primary text-sm">{new Date().toLocaleTimeString()}</div>
+                                <div className="hidden md:block text-theme-primary text-sm">{currentTime}</div>
                                 {/* XP bar */}
-                                <div className="hidden sm:flex items-center gap-2">
+                                <div className="flex items-center gap-2">
                                     <span className="text-xs text-theme-secondary">LVL 75</span>
                                     <div className="w-28 h-2 bg-gray-800 rounded overflow-hidden border border-theme">
-                                        <div className="h-full bg-gradient-to-r from-theme-primary to-theme-accent" style={{ width: '85%' }}></div>
+                                        <div className="h-full bg-gradient-theme" style={{ width: '85%' }}></div>
                                     </div>
                                     <span className="text-xs text-theme-secondary">8,500 XP</span>
                                 </div>
@@ -569,8 +632,13 @@ const TerminalPortfolio = () => {
                         {/* Terminal Body is the only scrollable area */}
                         <div
                             ref={terminalRef}
-                            className="flex-1 overflow-y-auto p-4 pb-20 bg-theme-background"
-                            onClick={() => inputRef.current?.focus()}
+                            className="flex-1 overflow-y-auto p-4 pb-20 bg-theme-background select-text"
+                            onClick={(e) => {
+                                // Only focus input if clicking on empty space, not on selectable text
+                                if (e.target === e.currentTarget) {
+                                    inputRef.current?.focus();
+                                }
+                            }}
                         >
                             {/* Welcome Message */}
                             <motion.div
@@ -653,9 +721,9 @@ const TerminalPortfolio = () => {
 
                         {/* Bottom status bar */}
                         <div className="bg-theme-surface px-4 py-2 border-t border-theme text-xs text-theme-secondary flex items-center gap-4">
-                            <span>Quest: Type 'help' to list commands</span>
-                            <span className="hidden sm:inline">Tip: Press ESC to close overlays</span>
-                            <span className="hidden md:inline">Konami: ↑↑↓↓←→←→BA</span>
+                            <span>Quest: Type 'help' for commands</span>
+                            <span className="hidden sm:inline">↑↓ for history, Tab to complete</span>
+                            <span className="hidden md:inline">Ctrl+L to clear, ESC to close</span>
                         </div>
                     </div>
                 </div>
@@ -667,9 +735,58 @@ const TerminalPortfolio = () => {
         if (e.key === "Enter") {
             executeCommand(input.trim());
             setInput("");
+            setHistoryIndex(-1);
+        } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            if (commandHistory.length > 0) {
+                const newIndex = historyIndex + 1;
+                if (newIndex < commandHistory.length) {
+                    setHistoryIndex(newIndex);
+                    setInput(commandHistory[commandHistory.length - 1 - newIndex]);
+                }
+            }
+        } else if (e.key === "ArrowDown") {
+            e.preventDefault();
+            if (historyIndex > 0) {
+                const newIndex = historyIndex - 1;
+                setHistoryIndex(newIndex);
+                setInput(commandHistory[commandHistory.length - 1 - newIndex]);
+            } else if (historyIndex === 0) {
+                setHistoryIndex(-1);
+                setInput("");
+            }
         } else if (e.key === "Tab") {
             e.preventDefault();
-            // Auto-complete functionality could go here
+            // Auto-complete functionality
+            const partial = input.trim();
+            if (partial) {
+                const commandNames = Object.keys(commands);
+                const matches = commandNames.filter(cmd => cmd.startsWith(partial));
+                if (matches.length === 1) {
+                    setInput(matches[0]);
+                } else if (matches.length > 1) {
+                    // Show suggestions
+                    const suggestionEntry = {
+                        command: input,
+                        output: `Possible completions: ${matches.join(', ')}`
+                    };
+                    setHistory(prev => [...prev, suggestionEntry]);
+                }
+            }
+        } else if (e.ctrlKey && e.key === "c") {
+            e.preventDefault();
+            setInput("");
+            setHistoryIndex(-1);
+        } else if (e.ctrlKey && e.key === "l") {
+            e.preventDefault();
+            setHistory([]);
+            setInput("");
+            setHistoryIndex(-1);
+        } else {
+            // Reset history index when typing
+            if (historyIndex !== -1) {
+                setHistoryIndex(-1);
+            }
         }
     }
 
@@ -695,6 +812,14 @@ const TerminalPortfolio = () => {
             try {
                 const result = await commands[commandName](args);
                 newEntry.output = result.output;
+                // Add successful command to history
+                setCommandHistory(prev => {
+                    const newHistory = [...prev];
+                    if (newHistory[newHistory.length - 1] !== cmd) {
+                        newHistory.push(cmd);
+                    }
+                    return newHistory;
+                });
             } catch (error) {
                 newEntry.output = `Error executing command: ${error.message}`;
             }
