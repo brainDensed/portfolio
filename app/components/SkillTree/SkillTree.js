@@ -192,7 +192,7 @@ const SkillTree = () => {
           <div className="space-y-1">
             <div>🟢 Mastered Skills</div>
             <div>⚡ Active Development</div>
-            <div>🎯 Target: 100CR+ Package</div>
+            <div>🎯 Target: 15LPA+ Package</div>
           </div>
         </div>
       </div>

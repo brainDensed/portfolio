@@ -50,7 +50,7 @@ const HolographicCard = ({ isVisible, onClose }) => {
                   <div className="text-xs text-green-300">HackOdisha Winner</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-xl font-bold text-green-400">100CR</div>
+                  <div className="text-xl font-bold text-green-400">15 LPA</div>
                   <div className="text-xs text-green-300">Target Package</div>
                 </div>
                 <div className="text-center">
