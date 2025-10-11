@@ -30,7 +30,6 @@ const TerminalPortfolio = () => {
                 "  clear         - Clear terminal",
                 "  matrix        - Enter the matrix mode",
                 "  hack          - Try to hack the system",
-                "  skilltree     - View RPG-style skill tree",
                 "  sudo          - Execute with admin privileges",
                 "  whoami        - Display current user info",
                 "  ls            - List directory contents",
@@ -60,25 +59,21 @@ const TerminalPortfolio = () => {
                 "╚════════════════════════════════════════════════════════════════════╝"
             ]
         }),
-        skills: () => ({
-            output: [
-                "🚀 TECHNICAL ARSENAL:",
-                "",
-                "Frontend:     ████████████████████ 95%  React, Next.js, TypeScript",
-                "Web3:         ██████████████████   85%  Solidity, Hardhat, Web3.js",
-                "Blockchain:   ███████████████      75%  Smart Contracts, DeFi, NFTs",
-                "Styling:      ██████████           50%  Tailwind, Material UI, Framer Motion",
-                "Tools:        ██████████████████   80%  Git, Docker, Vercel, Firebase",
-                "Languages:    ███████████████████  85%  JavaScript, TypeScript, C++, Go",
-                "",
-                "🎯 WEB3 SPECIALIZATIONS:",
-                "• Smart Contract Development",
-                "• DeFi Protocol Integration",
-                "• NFT Marketplace Development",
-                "• Blockchain Data Visualization",
-                "• zk-Proofs & Layer 2 Solutions"
-            ]
-        }),
+        skills: () => {
+            setTimeout(() => setShowSkillTree(true), 500);
+            return {
+                output: [
+                    "🎮 Loading Skill Tree Interface...",
+                    "",
+                    "████████████████████████████████ 100%",
+                    "",
+                    "🌟 Skill Tree Activated!",
+                    "Navigate through my technical abilities in RPG style.",
+                    "",
+                    "Loading interactive skill nodes..."
+                ]
+            };
+        },
         projects: () => ({
             output: [
                 "📁 PROJECT DIRECTORY:",
@@ -277,21 +272,6 @@ const TerminalPortfolio = () => {
                 "✅ Connection successful! Ready to collaborate."
             ]
         }),
-        skilltree: () => {
-            setTimeout(() => setShowSkillTree(true), 500);
-            return {
-                output: [
-                    "🎮 Loading Skill Tree Interface...",
-                    "",
-                    "████████████████████████████████ 100%",
-                    "",
-                    "🌟 Skill Tree Activated!",
-                    "Navigate through my technical abilities in RPG style.",
-                    "",
-                    "Loading interactive skill nodes..."
-                ]
-            };
-        },
         easter: () => ({
             output: [
                 "🥚 EASTER EGG FOUND!",
@@ -457,13 +437,6 @@ const TerminalPortfolio = () => {
             {showSkillTree && (
                 <div className="fixed inset-0 z-40 bg-black/95">
                     <SkillTree />
-                    <button
-                        onClick={() => setShowSkillTree(false)}
-                        className="absolute top-4 right-4 text-green-400 hover:text-green-300 
-                       bg-black/80 px-4 py-2 rounded border border-green-400"
-                    >
-                        Back to Terminal
-                    </button>
                 </div>
             )}
 
@@ -510,7 +483,7 @@ const TerminalPortfolio = () => {
                                 className="mb-4"
                             >
                                 <pre className="text-green-300 text-xs">
-{`
+                                    {`
 ██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗ 
 ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗
 ██████╔╝██║   ██║██████╔╝   ██║   █████╗  ██║   ██║██║     ██║██║   ██║
