@@ -252,20 +252,66 @@ const TerminalPortfolio = () => {
                 "Total: 7 items"
             ]
         }),
-        ping: () => ({
-            output: [
-                "PING shivam.dev (192.168.1.100): 56 data bytes",
-                "64 bytes from 192.168.1.100: icmp_seq=0 time=0.1ms",
-                "64 bytes from 192.168.1.100: icmp_seq=1 time=0.1ms",
-                "64 bytes from 192.168.1.100: icmp_seq=2 time=0.1ms",
-                "",
-                "--- shivam.dev ping statistics ---",
-                "3 packets transmitted, 3 packets received, 0.0% packet loss",
-                "round-trip min/avg/max/stddev = 0.1/0.1/0.1/0.0 ms",
-                "",
-                "✅ Connection successful! Ready to collaborate."
-            ]
-        }),
+        ping: async () => {
+            const pingResults = [];
+            const targetUrl = "https://api.github.com"; // Using GitHub API as a reliable endpoint
+            const pingCount = 3;
+            
+            try {
+                pingResults.push("PING api.github.com: 56 data bytes");
+                
+                let totalTime = 0;
+                let successfulPings = 0;
+                const times = [];
+                
+                for (let i = 0; i < pingCount; i++) {
+                    const startTime = performance.now();
+                    
+                    try {
+                        const response = await fetch(targetUrl, {
+                            method: 'HEAD',
+                            mode: 'no-cors',
+                            cache: 'no-cache'
+                        });
+                        
+                        const endTime = performance.now();
+                        const pingTime = Math.round((endTime - startTime) * 10) / 10;
+                        
+                        times.push(pingTime);
+                        totalTime += pingTime;
+                        successfulPings++;
+                        
+                        pingResults.push(`64 bytes from api.github.com: icmp_seq=${i} time=${pingTime}ms`);
+                    } catch (error) {
+                        pingResults.push(`Request timeout for icmp_seq=${i}`);
+                    }
+                }
+                
+                if (successfulPings > 0) {
+                    const avgTime = Math.round((totalTime / successfulPings) * 10) / 10;
+                    const minTime = Math.min(...times);
+                    const maxTime = Math.max(...times);
+                    const stdDev = Math.round(Math.sqrt(times.reduce((acc, time) => acc + Math.pow(time - avgTime, 2), 0) / times.length) * 10) / 10;
+                    
+                    pingResults.push("");
+                    pingResults.push("--- api.github.com ping statistics ---");
+                    pingResults.push(`${pingCount} packets transmitted, ${successfulPings} packets received, ${Math.round(((pingCount - successfulPings) / pingCount) * 100)}% packet loss`);
+                    pingResults.push(`round-trip min/avg/max/stddev = ${minTime}/${avgTime}/${maxTime}/${stdDev} ms`);
+                    pingResults.push("");
+                    pingResults.push("✅ Connection successful! Ready to collaborate.");
+                } else {
+                    pingResults.push("");
+                    pingResults.push("❌ All ping attempts failed. Check your internet connection.");
+                }
+                
+            } catch (error) {
+                pingResults.push("");
+                pingResults.push("❌ Network error: Unable to reach target host");
+                pingResults.push("Check your internet connection and try again.");
+            }
+            
+            return { output: pingResults };
+        },
         easter: () => ({
             output: [
                 "🥚 EASTER EGG FOUND!",
@@ -570,7 +616,7 @@ const TerminalPortfolio = () => {
         }
     }
 
-    function executeCommand(cmd) {
+    async function executeCommand(cmd) {
         const newEntry = { command: cmd };
 
         if (cmd === "") {
@@ -584,8 +630,12 @@ const TerminalPortfolio = () => {
         }
 
         if (commands[cmd]) {
-            const result = commands[cmd]();
-            newEntry.output = result.output;
+            try {
+                const result = await commands[cmd]();
+                newEntry.output = result.output;
+            } catch (error) {
+                newEntry.output = `Error executing command: ${error.message}`;
+            }
         } else {
             newEntry.output = `Command not found: ${cmd}. Type 'help' for available commands.`;
         }
