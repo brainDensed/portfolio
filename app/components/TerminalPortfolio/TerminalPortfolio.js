@@ -140,19 +140,13 @@ const TerminalPortfolio = () => {
             output: [
                 "📞 CONTACT INFORMATION:",
                 "",
-                "Email:     shivam.nilay46@gmail.com",
-                "Phone:     +91 8789581642",
                 "LinkedIn:  https://www.linkedin.com/in/shivam-nilay",
                 "GitHub:    https://github.com/brainDensed",
                 "HackerRank: https://www.hackerrank.com/profile/shivam_nilay46",
                 "",
-                "📍 Location: Darbhanga, Bihar, India",
                 "🕐 Timezone: IST (UTC+5:30)",
                 "🌐 Availability: Remote • Hybrid • On-site",
-                "",
-                "💬 Preferred contact: Email for opportunities",
                 "   LinkedIn for professional networking",
-                "",
                 "🏆 Notable: Award winner"
             ]
         }),
