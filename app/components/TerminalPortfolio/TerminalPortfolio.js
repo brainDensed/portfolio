@@ -67,7 +67,7 @@ const TerminalPortfolio = () => {
                 "Frontend:     ████████████████████ 95%  React, Next.js, TypeScript",
                 "Web3:         ██████████████████   85%  Solidity, Hardhat, Web3.js",
                 "Blockchain:   ███████████████      75%  Smart Contracts, DeFi, NFTs",
-                "Styling:      ████████████████████ 90%  Tailwind, Material UI, Framer Motion",
+                "Styling:      ██████████           50%  Tailwind, Material UI, Framer Motion",
                 "Tools:        ██████████████████   80%  Git, Docker, Vercel, Firebase",
                 "Languages:    ███████████████████  85%  JavaScript, TypeScript, C++, Go",
                 "",
