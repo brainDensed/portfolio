@@ -20,6 +20,14 @@ const TerminalPortfolio = () => {
     const terminalRef = useRef(null);
     const { changeTheme, getAvailableThemes, getCurrentThemeInfo } = useTheme();
     const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
+    const [liveData, setLiveData] = useState({
+        github: null,
+        ethPrice: null,
+        location: null,
+        weather: null,
+        totalCommits: null
+    });
+    const [isLoadingData, setIsLoadingData] = useState(true);
 
     const commands = {
         help: () => ({
@@ -562,6 +570,62 @@ const TerminalPortfolio = () => {
         return () => clearInterval(timer);
     }, []);
 
+    // Fetch live data
+    useEffect(() => {
+        const fetchLiveData = async () => {
+            try {
+                // GitHub user data
+                const githubRes = await fetch('https://api.github.com/users/brainDensed');
+                const github = await githubRes.json();
+
+                // ETH price in INR
+                const ethRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=inr');
+                const ethData = await ethRes.json();
+
+                // IP and location
+                const locationRes = await fetch('https://ipapi.co/json/');
+                const location = await locationRes.json();
+
+                // Weather data
+                const weatherRes = await fetch(`https://wttr.in/${location.city}?format=j1`);
+                const weatherData = await weatherRes.json();
+
+                // Coding time from GitHub events
+                const eventsRes = await fetch('https://api.github.com/users/brainDensed/events');
+                const events = await eventsRes.json();
+
+                // Calculate today's coding time
+                const today = new Date().toISOString().split('T')[0];
+                const todayEvents = events.filter(event =>
+                    event.type === 'PushEvent' &&
+                    event.created_at.startsWith(today)
+                );
+                const totalCommits = todayEvents.reduce((sum, event) => sum + event.payload.commits.length, 0);
+
+                setLiveData({
+                    github,
+                    ethPrice: ethData.ethereum?.inr || null,
+                    location,
+                    weather: weatherData.current_condition ? weatherData.current_condition[0] : null,
+                    totalCommits: `(${totalCommits} commits)`
+                });
+            } catch (error) {
+                console.error('Error fetching live data:', error);
+                setLiveData({
+                    github: null,
+                    ethPrice: null,
+                    location: null,
+                    weather: null,
+                    totalCommits: null
+                });
+            } finally {
+                setIsLoadingData(false);
+            }
+        };
+
+        fetchLiveData();
+    }, []);
+
     // Konami Code Easter Egg
     useEffect(() => {
         const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
@@ -649,16 +713,30 @@ const TerminalPortfolio = () => {
                             >
                                 <pre className="text-theme-secondary text-xs">
                                     {`
-██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗ 
-██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗
-██████╔╝██║   ██║██████╔╝   ██║   █████╗  ██║   ██║██║     ██║██║   ██║
-██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝  ██║   ██║██║     ██║██║   ██║
-██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝
-╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ 
-                                                                        
-      Frontend + Web3 Specialist
-            Welcome to Shivam's Interactive Terminal
-                 Type 'help' to get started
+ ██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗
+ ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗
+ ██████╔╝██║   ██║██████╔╝   ██║   █████╗  ██║   ██║██║     ██║██║   ██║
+ ██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝  ██║   ██║██║     ██║██║   ██║
+ ██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝
+ ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝
+
+       Frontend + Web3 Specialist
+             Welcome to Shivam's Interactive Terminal
+                  Type 'help' to get started
+
+${isLoadingData ? 'Loading live data...' : `
+Initializing Shivam System...
+Fetching live data...
+-------------------------------------
+Username: @${liveData.github?.login || 'brainDensed'}
+GitHub Repos: ${liveData.github?.public_repos || '12'} | Followers: ${liveData.github?.followers || '34'}
+ETH: ₹${liveData.ethPrice ? liveData.ethPrice.toLocaleString('en-IN') : '2,72,845'} | Weather: ${liveData.location?.city || 'Delhi'} ${liveData.weather?.weatherDesc?.[0]?.value || '☀️'} ${liveData.weather?.temp_C || '29'}°C
+IP: ${liveData.location?.ip || '103.211.50.32'} | Location: ${liveData.location?.city || 'Bangalore'}, ${liveData.location?.country_name || 'IN'}
+Total Commits (Today): ${liveData.totalCommits}
+Target Package: ₹15+ LPA
+-------------------------------------
+Type 'projects' or 'goals' to continue.
+`}
 `}
                                 </pre>
                             </motion.div>
