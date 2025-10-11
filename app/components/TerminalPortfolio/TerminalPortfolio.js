@@ -246,7 +246,7 @@ const TerminalPortfolio = () => {
                 "Superpower:  Building the decentralized future",
                 "",
                 "🏆 ACHIEVEMENTS UNLOCKED:",
-                "• HackOdisha 5.0 Champion",
+                "• HackOdisha 5.0 Winner - Verbwire Track",
                 "• Web3 Pioneer",
                 "• React Specialist",
                 "• Performance Optimizer",
@@ -516,7 +516,7 @@ const TerminalPortfolio = () => {
 ██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝
 ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ 
                                                                         
-              🏆 HackOdisha 5.0 Winner | Frontend + Web3 Specialist
+              🏆 HackOdisha 5.0 Winner - Verbwire Track | Frontend + Web3 Specialist
                     Welcome to Shivam's Interactive Terminal
                          Type 'help' to get started
 `}
