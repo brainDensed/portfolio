@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <title>Shivam - Web3 Developer Portfolio</title>
-        <meta name="description" content="HackOdisha 5.0 Winner | Frontend + Web3 Specialist" />
+        <meta name="description" content="Frontend + Web3 Specialist" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

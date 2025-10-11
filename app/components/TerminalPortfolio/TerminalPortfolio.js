@@ -38,7 +38,7 @@ const TerminalPortfolio = () => {
                 "  ping          - Test network connectivity",
                 "  card          - Generate holographic business card",
                 "  web3          - Explore Web3 achievements",
-                "  hackathon     - HackOdisha 5.0 victory details",
+                "  hackathon     - Hackathon victory details",
                 "  competitive   - Competitive programming stats",
                 "  easter        - ???",
                 "",
@@ -47,18 +47,17 @@ const TerminalPortfolio = () => {
         }),
         about: () => ({
             output: [
-                "╔══════════════════════════════════════════════════════════════╗",
-                "║                        SHIVAM.EXE                            ║",
-                "╠══════════════════════════════════════════════════════════════╣",
-                "║ Frontend Developer | Web3 Specialist                        ║",
-                "║ Location: Darbhanga, Bihar, India                           ║",
-                "║ Targeting: ₹15 LPA+ Package                                 ║",
-                "║                                                              ║",
-                "║ 🏆 HackOdisha 5.0 Winner - Verbwire Track                   ║",
-                "║ 🚀 2+ Years Frontend Development Experience                  ║",
-                "║ ⚡ Blockchain & DeFi Enthusiast                              ║",
-                "║ 💡 Building the future of decentralized web                 ║",
-                "╚══════════════════════════════════════════════════════════════╝"
+                "╔════════════════════════════════════════════════════════════════════╗",
+                "║                        SHIVAM.EXE                                  ║",
+                "╠════════════════════════════════════════════════════════════════════╣",
+                "║ Frontend Developer | Web3 Specialist                               ║",
+                "║ Location: Darbhanga, Bihar, India                                  ║",
+                "║ Targeting: ₹15 LPA+ Package                                        ║",
+                "║                                                                    ║",
+                "║ 2+ Years Frontend Development Experience                           ║",
+                "║ Blockchain & DeFi Enthusiast                                       ║",
+                "║ Building the future of decentralized web                           ║",
+                "╚════════════════════════════════════════════════════════════════════╝"
             ]
         }),
         skills: () => ({
@@ -84,10 +83,10 @@ const TerminalPortfolio = () => {
             output: [
                 "📁 PROJECT DIRECTORY:",
                 "",
-                "├── 🏆 Theramine-Winner/",
+                "├── 🏆 Theramine/",
                 "│   ├── Track: Verbwire - Web3 Infrastructure",
                 "│   ├── Tech: React, Solidity, Web3.js, Hardhat",
-                "│   ├── Achievement: HackOdisha 5.0 - Verbwire track Winner",
+                "│   ├── Achievement: Award-winning project",
                 "│   └── Impact: Secure chat on Web3 between therapist and user",
                 "",
                 "├── 🧬 Genoroot/",
@@ -137,7 +136,6 @@ const TerminalPortfolio = () => {
                 "                     └── Specialized in web technologies",
                 "",
                 "🏆 ACHIEVEMENTS:",
-                "• HackOdisha 5.0 Winner - Verbwire Track",
                 "• 2+ years professional frontend experience",
                 "• Expertise in React ecosystem & Web3 technologies",
                 "• Strong problem-solving skills in competitive programming"
@@ -149,19 +147,18 @@ const TerminalPortfolio = () => {
                 "",
                 "Email:     shivam.nilay46@gmail.com",
                 "Phone:     +91 8789581642",
-                "LinkedIn:  /in/shivam-nilay",
-                "GitHub:    /shivam-nilay",
-                "Portfolio: https://shivam-portfolio.dev",
-                "HackerRank: /shivam-competitive",
+                "LinkedIn:  https://www.linkedin.com/in/shivam-nilay",
+                "GitHub:    https://github.com/brainDensed",
+                "HackerRank: https://www.hackerrank.com/profile/shivam_nilay46",
                 "",
-                "� Loceation: Darbhanga, Bihar, India",
+                "📍 Location: Darbhanga, Bihar, India",
                 "🕐 Timezone: IST (UTC+5:30)",
                 "🌐 Availability: Remote • Hybrid • On-site",
                 "",
                 "💬 Preferred contact: Email for opportunities",
                 "   LinkedIn for professional networking",
                 "",
-                "🏆 Notable: HackOdisha 5.0 Winner (Verbwire Track)"
+                "🏆 Notable: Award winner"
             ]
         }),
         resume: () => {
@@ -174,7 +171,6 @@ const TerminalPortfolio = () => {
                     "",
                     "📊 RESUME HIGHLIGHTS:",
                     "• 2+ years of professional frontend experience",
-                    "• HackOdisha 5.0 Winner - Verbwire Track",
                     "• Expert in React, Next.js, and Web3 technologies",
                     "• 5+ production projects with measurable impact",
                     "• Strong foundation in blockchain and DeFi",
@@ -212,7 +208,7 @@ const TerminalPortfolio = () => {
                 "🚨 ACCESS GRANTED 🚨",
                 "",
                 "CLASSIFIED: SHIVAM'S SECRET ABILITIES",
-                "═══════════════════════════════════",
+                "══════════════��════════════════════",
                 "• Can debug production issues in sleep",
                 "• Writes code that actually works on first try",
                 "• Understands CSS centering without Stack Overflow",
@@ -246,7 +242,6 @@ const TerminalPortfolio = () => {
                 "Superpower:  Building the decentralized future",
                 "",
                 "🏆 ACHIEVEMENTS UNLOCKED:",
-                "• HackOdisha 5.0 Winner - Verbwire Track",
                 "• Web3 Pioneer",
                 "• React Specialist",
                 "• Performance Optimizer",
@@ -344,7 +339,6 @@ const TerminalPortfolio = () => {
                 "╚═══════════════════════════════════════════════════════════╝",
                 "",
                 "🏆 ACHIEVEMENTS:",
-                "• HackOdisha 5.0 Winner - Verbwire Track",
                 "• Smart Contract Development",
                 "• DeFi Protocol Integration",
                 "• NFT Marketplace Experience",
@@ -362,10 +356,10 @@ const TerminalPortfolio = () => {
                 "╔═══════════════════════════════════════════════════════════╗",
                 "║                    CHAMPIONSHIP DETAILS                   ║",
                 "╠═══════════════════════════════════════════════════════════╣",
-                "║ Event:        HackOdisha 5.0                             ║",
-                "║ Track:        Verbwire - Web3 Infrastructure             ║",
-                "║ Result:       🥇 FIRST PLACE WINNER                      ║",
-                "║ Achievement:  Top performer among 500+ participants      ║",
+                "║ Event:        HackOdisha 5.0                              ║",
+                "║ Track:        Verbwire - Web3 Infrastructure              ║",
+                "║ Result:       Verbwire Track WINNER                       ║",
+                "║ Achievement:  Top performer among 438 Projects            ║",
                 "╚═══════════════════════════════════════════════════════════╝",
                 "",
                 "🚀 PROJECT HIGHLIGHTS:",
@@ -400,15 +394,6 @@ const TerminalPortfolio = () => {
                 "║ Languages:        C++, JavaScript, TypeScript             ║",
                 "║ Specialization:   Algorithms & Data Structures            ║",
                 "╚═══════════════════════════════════════════════════════════╝",
-                "",
-                "💪 CORE STRENGTHS:",
-                "• Dynamic Programming",
-                "• Graph Algorithms",
-                "• Tree Traversals",
-                "• Sorting & Searching",
-                "• String Manipulation",
-                "• Mathematical Problem Solving",
-                "",
                 "🏆 ACHIEVEMENTS:",
                 "• Consistent problem solver on HackerRank",
                 "• Strong grasp of time & space complexity",
@@ -470,7 +455,7 @@ const TerminalPortfolio = () => {
             <MatrixRain isActive={showMatrix} onClose={() => setShowMatrix(false)} />
             <HolographicCard isVisible={showCard} onClose={() => setShowCard(false)} />
             {showSkillTree && (
-                <div className="fixed inset-0 z-40 bg-black">
+                <div className="fixed inset-0 z-40 bg-black/95">
                     <SkillTree />
                     <button
                         onClick={() => setShowSkillTree(false)}
@@ -481,34 +466,51 @@ const TerminalPortfolio = () => {
                     </button>
                 </div>
             )}
-            <div className="min-h-screen bg-black text-green-400 font-mono overflow-hidden">
-                {/* Terminal Header */}
-                <div className="bg-gray-900 px-4 py-2 flex items-center justify-between border-b border-green-400">
-                    <div className="flex items-center space-x-2">
-                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                        <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    </div>
-                    <div className="text-green-400 text-sm">shivam@portfolio:~$</div>
-                    <div className="text-green-400 text-sm">
-                        {new Date().toLocaleTimeString()}
-                    </div>
-                </div>
-                {/* Terminal Body */}
-                <div
-                    ref={terminalRef}
-                    className="h-screen overflow-y-auto p-4 pb-20"
-                    onClick={() => inputRef.current?.focus()}
-                >
-                    {/* Welcome Message */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1 }}
-                        className="mb-4"
-                    >
-                        <pre className="text-green-300 text-xs">
-                            {`
+
+            {/* Page wrapper with padding; height constrained to viewport to avoid body scroll */}
+            <div className="min-h-screen text-green-400 font-mono">
+                <div className="container mx-auto p-6">
+                    {/* Terminal Window */}
+                    <div className="terminal-window border border-green-500/50 rounded-xl shadow-2xl overflow-hidden max-w-5xl mx-auto h-[calc(100vh-3rem)] flex flex-col">
+                        {/* Terminal Header with gamified UI */}
+                        <div className="bg-gray-900/90 px-4 py-3 flex items-center justify-between border-b border-green-400/60">
+                            <div className="flex items-center gap-2">
+                                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-green-300 text-sm">Shivam's Interactive Terminal</div>
+                                <div className="text-green-600 text-xs">Frontend + Web3</div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <div className="hidden md:block text-green-400 text-sm">{new Date().toLocaleTimeString()}</div>
+                                {/* XP bar */}
+                                <div className="hidden sm:flex items-center gap-2">
+                                    <span className="text-xs text-green-300">LVL 75</span>
+                                    <div className="w-28 h-2 bg-gray-800 rounded overflow-hidden border border-green-900/40">
+                                        <div className="h-full bg-gradient-to-r from-green-500 to-emerald-300" style={{ width: '85%' }}></div>
+                                    </div>
+                                    <span className="text-xs text-green-300">8,500 XP</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Terminal Body is the only scrollable area */}
+                        <div
+                            ref={terminalRef}
+                            className="flex-1 overflow-y-auto p-4 pb-20 bg-black"
+                            onClick={() => inputRef.current?.focus()}
+                        >
+                            {/* Welcome Message */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 1 }}
+                                className="mb-4"
+                            >
+                                <pre className="text-green-300 text-xs">
+{`
 ██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗ 
 ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗
 ██████╔╝██║   ██║██████╔╝   ██║   █████╗  ██║   ██║██║     ██║██║   ██║
@@ -516,66 +518,75 @@ const TerminalPortfolio = () => {
 ██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝
 ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ 
                                                                         
-              🏆 HackOdisha 5.0 Winner - Verbwire Track | Frontend + Web3 Specialist
-                    Welcome to Shivam's Interactive Terminal
-                         Type 'help' to get started
+      Frontend + Web3 Specialist
+            Welcome to Shivam's Interactive Terminal
+                 Type 'help' to get started
 `}
-                        </pre>
-                    </motion.div>
-
-                    {/* Command History */}
-                    <AnimatePresence>
-                        {history.map((entry, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="mb-2"
-                            >
-                                <div className="flex items-center">
-                                    <span className="text-blue-400">shivam@portfolio</span>
-                                    <span className="text-white">:</span>
-                                    <span className="text-yellow-400">{currentPath}</span>
-                                    <span className="text-white">$ </span>
-                                    <span className="text-green-400">{entry.command}</span>
-                                </div>
-                                {entry.output && (
-                                    <div className="ml-4 mt-1 whitespace-pre-wrap">
-                                        {Array.isArray(entry.output)
-                                            ? entry.output.map((line, i) => (
-                                                <div key={i} className="text-green-300">{line}</div>
-                                            ))
-                                            : <div className="text-green-300">{entry.output}</div>
-                                        }
-                                    </div>
-                                )}
+                                </pre>
                             </motion.div>
-                        ))}
-                    </AnimatePresence>
 
-                    {/* Current Input Line */}
-                    <div className="flex items-center">
-                        <span className="text-blue-400">shivam@portfolio</span>
-                        <span className="text-white">:</span>
-                        <span className="text-yellow-400">{currentPath}</span>
-                        <span className="text-white">$ </span>
-                        <input
-                            ref={inputRef}
-                            type="text"
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            onKeyDown={handleKeyDown}
-                            className="bg-transparent outline-none text-green-400 flex-1 caret-green-400"
-                            autoComplete="off"
-                            spellCheck="false"
-                        />
-                        <motion.span
-                            animate={{ opacity: [1, 0] }}
-                            transition={{ duration: 1, repeat: Infinity }}
-                            className="text-green-400"
-                        >
-                            █
-                        </motion.span>
+                            {/* Command History */}
+                            <AnimatePresence>
+                                {history.map((entry, index) => (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="mb-2"
+                                    >
+                                        <div className="flex items-center">
+                                            <span className="text-blue-400">shivam@portfolio</span>
+                                            <span className="text-white">:</span>
+                                            <span className="text-yellow-400">{currentPath}</span>
+                                            <span className="text-white">$ </span>
+                                            <span className="text-green-400">{entry.command}</span>
+                                        </div>
+                                        {entry.output && (
+                                            <div className="ml-4 mt-1 whitespace-pre-wrap">
+                                                {Array.isArray(entry.output)
+                                                    ? entry.output.map((line, i) => (
+                                                        <div key={i} className="text-green-300">{line}</div>
+                                                    ))
+                                                    : <div className="text-green-300">{entry.output}</div>
+                                                }
+                                            </div>
+                                        )}
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
+
+                            {/* Current Input Line */}
+                            <div className="flex items-center">
+                                <span className="text-blue-400">shivam@portfolio</span>
+                                <span className="text-white">:</span>
+                                <span className="text-yellow-400">{currentPath}</span>
+                                <span className="text-white">$ </span>
+                                <input
+                                    ref={inputRef}
+                                    type="text"
+                                    value={input}
+                                    onChange={(e) => setInput(e.target.value)}
+                                    onKeyDown={handleKeyDown}
+                                    className="bg-transparent outline-none text-green-400 flex-1 caret-green-400"
+                                    autoComplete="off"
+                                    spellCheck="false"
+                                />
+                                <motion.span
+                                    animate={{ opacity: [1, 0] }}
+                                    transition={{ duration: 1, repeat: Infinity }}
+                                    className="text-green-400"
+                                >
+                                    █
+                                </motion.span>
+                            </div>
+                        </div>
+
+                        {/* Bottom status bar */}
+                        <div className="bg-gray-900/90 px-4 py-2 border-t border-green-400/60 text-xs text-green-300 flex items-center gap-4">
+                            <span>Quest: Type 'help' to list commands</span>
+                            <span className="hidden sm:inline">Tip: Press ESC to close overlays</span>
+                            <span className="hidden md:inline">Konami: ↑↑↓↓←→←→BA</span>
+                        </div>
                     </div>
                 </div>
             </div>

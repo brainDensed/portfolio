@@ -226,7 +226,6 @@ html {
 @layer base {
   * {
     @apply border-border;
-    cursor: none;
   }
   body {
     @apply bg-background text-foreground;
@@ -237,4 +236,55 @@ html {
   -webkit-backdrop-filter: invert(1.2) brightness(1.5);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styled neon scrollbars */
+.scrollbar-neon {
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #22c55e rgba(3, 7, 18, 0.6);
+}
+.scrollbar-neon::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.scrollbar-neon::-webkit-scrollbar-track {
+  background: rgba(3, 7, 18, 0.6);
+  border: 1px solid rgba(34, 197, 94, 0.15);
+  border-radius: 9999px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+.scrollbar-neon::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #22c55e, #34d399);
+  border-radius: 9999px;
+  border: 2px solid rgba(3, 7, 18, 0.6);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+.scrollbar-neon::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #34d399, #86efac);
+}
+
+/* Apply neon scrollbar to the terminal's scrollable area */
+.terminal-window .overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #22c55e rgba(3, 7, 18, 0.6);
+}
+.terminal-window .overflow-y-auto::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.terminal-window .overflow-y-auto::-webkit-scrollbar-track {
+  background: rgba(3, 7, 18, 0.6);
+  border: 1px solid rgba(34, 197, 94, 0.15);
+  border-radius: 9999px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+.terminal-window .overflow-y-auto::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #22c55e, #34d399);
+  border-radius: 9999px;
+  border: 2px solid rgba(3, 7, 18, 0.6);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+.terminal-window .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #34d399, #86efac);
 }

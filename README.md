@@ -119,11 +119,11 @@ Ready to discuss opportunities? Use the terminal commands or reach out directly:
 
 ## 🏆 Notable Achievements
 
-- **HackOdisha 5.0 Winner** - Verbwire Track (Web3 Infrastructure)
+- **Award Winner** (Hackathon)
 - **2+ Years** Professional Frontend Development Experience
 - **Expert** in React, Next.js, and Web3 Technologies
 - **Strong Foundation** in Competitive Programming & DSA
 
 ---
 
-*Built with ❤️ and lots of ☕ by Shivam - HackOdisha 5.0 Winner targeting the top 1% of Web3 developer opportunities*
+*Built with ❤️ and lots of ☕ by Shivam, targeting the top 1% of Web3 developer opportunities*
