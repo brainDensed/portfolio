@@ -52,7 +52,7 @@ const TerminalPortfolio = () => {
                 "╠══════════════════════════════════════════════════════════════╣",
                 "║ Frontend Developer | Web3 Specialist                        ║",
                 "║ Location: Darbhanga, Bihar, India                           ║",
-                "║ Targeting: ₹100 CR+ Package                                 ║",
+                "║ Targeting: ₹15 LPA+ Package                                 ║",
                 "║                                                              ║",
                 "║ 🏆 HackOdisha 5.0 Winner - Verbwire Track                   ║",
                 "║ 🚀 2+ Years Frontend Development Experience                  ║",

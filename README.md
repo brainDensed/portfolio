@@ -2,7 +2,7 @@
 
 Welcome to my **revolutionary terminal-based portfolio**! This isn't just another portfolio website - it's an interactive command-line experience that showcases cutting-edge web development skills and innovative UI/UX design.
 
-## 🎯 Vision: Targeting 100CR+ Package
+## 🎯 Vision: Targeting 15 LPA+ Package
 
 This portfolio is designed to demonstrate the level of innovation and technical expertise required for top-tier developer positions. Every feature is crafted to showcase skills that put me in the **top 1% of developers**.
 
