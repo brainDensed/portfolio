@@ -58,12 +58,25 @@
   transform: rotateY(180deg);
 }
 
+/* Theme Variables */
+:root {
+  --theme-primary: #00ff00;
+  --theme-secondary: #00cc00;
+  --theme-accent: #00ff88;
+  --theme-background: #000000;
+  --theme-surface: #0a0a0a;
+  --theme-text: #00ff00;
+  --theme-textSecondary: #00cc00;
+  --theme-border: #00ff00;
+  --theme-glow: #00ff00;
+}
+
 /* Enhanced Terminal Styling */
 .terminal-window {
   background: 
-    radial-gradient(circle at 25% 25%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(0, 255, 0, 0.05) 0%, transparent 50%),
-    #000000;
+    radial-gradient(circle at 25% 25%, var(--theme-primary, #00ff00) 0.1, transparent 50%),
+    radial-gradient(circle at 75% 75%, var(--theme-primary, #00ff00) 0.05, transparent 50%),
+    var(--theme-background, #000000);
 }
 
 /* Material 3 inspired styles with iOS-like boxy design */
@@ -287,4 +300,137 @@ html {
 }
 .terminal-window .overflow-y-auto::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #34d399, #86efac);
+}
+
+/* Theme-specific styles */
+.theme-matrix {
+  --theme-primary: #00ff00;
+  --theme-secondary: #00cc00;
+  --theme-accent: #00ff88;
+  --theme-background: #000000;
+  --theme-surface: #0a0a0a;
+  --theme-text: #00ff00;
+  --theme-textSecondary: #00cc00;
+  --theme-border: #00ff00;
+  --theme-glow: #00ff00;
+}
+
+.theme-cyberpunk {
+  --theme-primary: #ff0080;
+  --theme-secondary: #00ffff;
+  --theme-accent: #ff4080;
+  --theme-background: #0a0a1a;
+  --theme-surface: #1a1a2e;
+  --theme-text: #ff0080;
+  --theme-textSecondary: #00ffff;
+  --theme-border: #ff0080;
+  --theme-glow: #ff0080;
+}
+
+.theme-terminal {
+  --theme-primary: #ffaa00;
+  --theme-secondary: #ff8800;
+  --theme-accent: #ffcc00;
+  --theme-background: #000000;
+  --theme-surface: #0a0a0a;
+  --theme-text: #ffaa00;
+  --theme-textSecondary: #ff8800;
+  --theme-border: #ffaa00;
+  --theme-glow: #ffaa00;
+}
+
+.theme-ocean {
+  --theme-primary: #00aaff;
+  --theme-secondary: #0088cc;
+  --theme-accent: #00ccff;
+  --theme-background: #001122;
+  --theme-surface: #002244;
+  --theme-text: #00aaff;
+  --theme-textSecondary: #0088cc;
+  --theme-border: #00aaff;
+  --theme-glow: #00aaff;
+}
+
+.theme-fire {
+  --theme-primary: #ff4400;
+  --theme-secondary: #ff6600;
+  --theme-accent: #ff8800;
+  --theme-background: #1a0000;
+  --theme-surface: #2a0000;
+  --theme-text: #ff4400;
+  --theme-textSecondary: #ff6600;
+  --theme-border: #ff4400;
+  --theme-glow: #ff4400;
+}
+
+.theme-purple {
+  --theme-primary: #aa00ff;
+  --theme-secondary: #8800cc;
+  --theme-accent: #cc00ff;
+  --theme-background: #1a0a2a;
+  --theme-surface: #2a1a3a;
+  --theme-text: #aa00ff;
+  --theme-textSecondary: #8800cc;
+  --theme-border: #aa00ff;
+  --theme-glow: #aa00ff;
+}
+
+.theme-monochrome {
+  --theme-primary: #ffffff;
+  --theme-secondary: #cccccc;
+  --theme-accent: #ffffff;
+  --theme-background: #000000;
+  --theme-surface: #111111;
+  --theme-text: #ffffff;
+  --theme-textSecondary: #cccccc;
+  --theme-border: #ffffff;
+  --theme-glow: #ffffff;
+}
+
+/* Dynamic theme application */
+body {
+  background: var(--theme-background);
+  color: var(--theme-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Terminal theme integration */
+.terminal-window {
+  background: 
+    radial-gradient(circle at 25% 25%, var(--theme-primary) 0.1, transparent 50%),
+    radial-gradient(circle at 75% 75%, var(--theme-primary) 0.05, transparent 50%),
+    var(--theme-background);
+  border-color: var(--theme-border);
+}
+
+/* Theme-aware text colors */
+.text-theme-primary {
+  color: var(--theme-primary);
+}
+
+.text-theme-secondary {
+  color: var(--theme-secondary);
+}
+
+.text-theme-accent {
+  color: var(--theme-accent);
+}
+
+/* Theme-aware borders */
+.border-theme {
+  border-color: var(--theme-border);
+}
+
+/* Theme-aware glow effects */
+.glow-theme {
+  text-shadow: 
+    0 0 5px var(--theme-glow),
+    0 0 10px var(--theme-glow),
+    0 0 15px var(--theme-glow),
+    0 0 20px var(--theme-glow);
+}
+
+/* Theme-aware backgrounds */
+.bg-theme-surface {
+  background-color: var(--theme-surface);
 }

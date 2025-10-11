@@ -2,9 +2,11 @@
 
 import React, { useState, useCallback, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "../../contexts/ThemeContext";
 
 const SkillTree = () => {
   const [selectedNode, setSelectedNode] = useState(null);
+  const { getCurrentThemeInfo } = useTheme();
 
   const skillTree = {
     id: "root",

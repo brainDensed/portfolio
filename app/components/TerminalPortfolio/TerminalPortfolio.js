@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import MatrixRain from "../MatrixRain/MatrixRain";
 import SkillTree from "../SkillTree/SkillTree";
 import HolographicCard from "../HolographicCard/HolographicCard";
+import { useTheme } from "../../contexts/ThemeContext";
 
 const TerminalPortfolio = () => {
     const [input, setInput] = useState("");
@@ -15,6 +16,7 @@ const TerminalPortfolio = () => {
     const [showCard, setShowCard] = useState(false);
     const inputRef = useRef(null);
     const terminalRef = useRef(null);
+    const { currentTheme, changeTheme, getAvailableThemes, getCurrentThemeInfo } = useTheme();
 
     const commands = {
         help: () => ({
@@ -40,6 +42,8 @@ const TerminalPortfolio = () => {
                 "  hackathon     - Hackathon victory details",
                 "  competitive   - Competitive programming stats",
                 "  easter        - ???",
+                "  theme         - Change terminal theme",
+                "  themes        - List available themes",
                 "",
                 "Type any command to get started!"
             ]
@@ -425,7 +429,60 @@ const TerminalPortfolio = () => {
                 "• Improved application performance through efficient data structures",
                 "• Applied competitive programming skills to solve complex business problems"
             ]
-        })
+        }),
+        theme: (args) => {
+            if (!args || args.length === 0) {
+                const currentThemeInfo = getCurrentThemeInfo();
+                return {
+                    output: [
+                        "🎨 CURRENT THEME:",
+                        "",
+                        `Name: ${currentThemeInfo.name}`,
+                        `Description: ${currentThemeInfo.description}`,
+                        "",
+                        "Usage: theme <theme-name>",
+                        "Type 'themes' to see available options"
+                    ]
+                };
+            }
+            
+            const result = changeTheme(args[0]);
+            if (result.success) {
+                return {
+                    output: [
+                        `🎨 Theme changed to: ${result.theme.name}`,
+                        "",
+                        `Description: ${result.theme.description}`,
+                        "",
+                        "✨ Theme applied successfully!",
+                        "The terminal will now use the new color scheme."
+                    ]
+                };
+            } else {
+                return {
+                    output: [
+                        `❌ Error: Theme '${args[0]}' not found`,
+                        "",
+                        "Type 'themes' to see available options"
+                    ]
+                };
+            }
+        },
+        themes: () => {
+            const availableThemes = getAvailableThemes();
+            return {
+                output: [
+                    "🎨 AVAILABLE THEMES:",
+                    "",
+                    ...availableThemes.map(theme => 
+                        `  ${theme.key.padEnd(12)} - ${theme.name}: ${theme.description}`
+                    ),
+                    "",
+                    "Usage: theme <theme-name>",
+                    "Example: theme cyberpunk"
+                ]
+            };
+        }
     };
 
     useEffect(() => {
@@ -481,30 +538,30 @@ const TerminalPortfolio = () => {
             )}
 
             {/* Page wrapper with padding; height constrained to viewport to avoid body scroll */}
-            <div className="min-h-screen text-green-400 font-mono">
+            <div className="min-h-screen text-theme-primary font-mono">
                 <div className="container mx-auto p-6">
                     {/* Terminal Window */}
-                    <div className="terminal-window border border-green-500/50 rounded-xl shadow-2xl overflow-hidden max-w-5xl mx-auto h-[calc(100vh-3rem)] flex flex-col">
+                    <div className="terminal-window border border-theme rounded-xl shadow-2xl overflow-hidden max-w-5xl mx-auto h-[calc(100vh-3rem)] flex flex-col">
                         {/* Terminal Header with gamified UI */}
-                        <div className="bg-gray-900/90 px-4 py-3 flex items-center justify-between border-b border-green-400/60">
+                        <div className="bg-theme-surface px-4 py-3 flex items-center justify-between border-b border-theme">
                             <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                             </div>
                             <div className="text-center">
-                                <div className="text-green-300 text-sm">Shivam's Interactive Terminal</div>
-                                <div className="text-green-600 text-xs">Frontend + Web3</div>
+                                <div className="text-theme-secondary text-sm">Shivam's Interactive Terminal</div>
+                                <div className="text-theme-accent text-xs">Frontend + Web3</div>
                             </div>
                             <div className="flex items-center gap-4">
-                                <div className="hidden md:block text-green-400 text-sm">{new Date().toLocaleTimeString()}</div>
+                                <div className="hidden md:block text-theme-primary text-sm">{new Date().toLocaleTimeString()}</div>
                                 {/* XP bar */}
                                 <div className="hidden sm:flex items-center gap-2">
-                                    <span className="text-xs text-green-300">LVL 75</span>
-                                    <div className="w-28 h-2 bg-gray-800 rounded overflow-hidden border border-green-900/40">
-                                        <div className="h-full bg-gradient-to-r from-green-500 to-emerald-300" style={{ width: '85%' }}></div>
+                                    <span className="text-xs text-theme-secondary">LVL 75</span>
+                                    <div className="w-28 h-2 bg-gray-800 rounded overflow-hidden border border-theme">
+                                        <div className="h-full bg-gradient-to-r from-theme-primary to-theme-accent" style={{ width: '85%' }}></div>
                                     </div>
-                                    <span className="text-xs text-green-300">8,500 XP</span>
+                                    <span className="text-xs text-theme-secondary">8,500 XP</span>
                                 </div>
                             </div>
                         </div>
@@ -512,7 +569,7 @@ const TerminalPortfolio = () => {
                         {/* Terminal Body is the only scrollable area */}
                         <div
                             ref={terminalRef}
-                            className="flex-1 overflow-y-auto p-4 pb-20 bg-black"
+                            className="flex-1 overflow-y-auto p-4 pb-20 bg-theme-background"
                             onClick={() => inputRef.current?.focus()}
                         >
                             {/* Welcome Message */}
@@ -522,7 +579,7 @@ const TerminalPortfolio = () => {
                                 transition={{ duration: 1 }}
                                 className="mb-4"
                             >
-                                <pre className="text-green-300 text-xs">
+                                <pre className="text-theme-secondary text-xs">
                                     {`
 ██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗ 
 ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗
@@ -548,19 +605,19 @@ const TerminalPortfolio = () => {
                                         className="mb-2"
                                     >
                                         <div className="flex items-center">
-                                            <span className="text-blue-400">shivam@portfolio</span>
-                                            <span className="text-white">:</span>
-                                            <span className="text-yellow-400">{currentPath}</span>
-                                            <span className="text-white">$ </span>
-                                            <span className="text-green-400">{entry.command}</span>
+                                            <span className="text-theme-accent">shivam@portfolio</span>
+                                            <span className="text-theme-secondary">:</span>
+                                            <span className="text-theme-primary">{currentPath}</span>
+                                            <span className="text-theme-secondary">$ </span>
+                                            <span className="text-theme-primary">{entry.command}</span>
                                         </div>
                                         {entry.output && (
                                             <div className="ml-4 mt-1 whitespace-pre-wrap">
                                                 {Array.isArray(entry.output)
                                                     ? entry.output.map((line, i) => (
-                                                        <div key={i} className="text-green-300">{line}</div>
+                                                        <div key={i} className="text-theme-secondary">{line}</div>
                                                     ))
-                                                    : <div className="text-green-300">{entry.output}</div>
+                                                    : <div className="text-theme-secondary">{entry.output}</div>
                                                 }
                                             </div>
                                         )}
@@ -570,24 +627,24 @@ const TerminalPortfolio = () => {
 
                             {/* Current Input Line */}
                             <div className="flex items-center">
-                                <span className="text-blue-400">shivam@portfolio</span>
-                                <span className="text-white">:</span>
-                                <span className="text-yellow-400">{currentPath}</span>
-                                <span className="text-white">$ </span>
+                                <span className="text-theme-accent">shivam@portfolio</span>
+                                <span className="text-theme-secondary">:</span>
+                                <span className="text-theme-primary">{currentPath}</span>
+                                <span className="text-theme-secondary">$ </span>
                                 <input
                                     ref={inputRef}
                                     type="text"
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
                                     onKeyDown={handleKeyDown}
-                                    className="bg-transparent outline-none text-green-400 flex-1 caret-green-400"
+                                    className="bg-transparent outline-none text-theme-primary flex-1 caret-theme-primary"
                                     autoComplete="off"
                                     spellCheck="false"
                                 />
                                 <motion.span
                                     animate={{ opacity: [1, 0] }}
                                     transition={{ duration: 1, repeat: Infinity }}
-                                    className="text-green-400"
+                                    className="text-theme-primary"
                                 >
                                     █
                                 </motion.span>
@@ -595,7 +652,7 @@ const TerminalPortfolio = () => {
                         </div>
 
                         {/* Bottom status bar */}
-                        <div className="bg-gray-900/90 px-4 py-2 border-t border-green-400/60 text-xs text-green-300 flex items-center gap-4">
+                        <div className="bg-theme-surface px-4 py-2 border-t border-theme text-xs text-theme-secondary flex items-center gap-4">
                             <span>Quest: Type 'help' to list commands</span>
                             <span className="hidden sm:inline">Tip: Press ESC to close overlays</span>
                             <span className="hidden md:inline">Konami: ↑↑↓↓←→←→BA</span>
@@ -629,15 +686,20 @@ const TerminalPortfolio = () => {
             return;
         }
 
-        if (commands[cmd]) {
+        // Parse command and arguments
+        const parts = cmd.trim().split(/\s+/);
+        const commandName = parts[0];
+        const args = parts.slice(1);
+
+        if (commands[commandName]) {
             try {
-                const result = await commands[cmd]();
+                const result = await commands[commandName](args);
                 newEntry.output = result.output;
             } catch (error) {
                 newEntry.output = `Error executing command: ${error.message}`;
             }
         } else {
-            newEntry.output = `Command not found: ${cmd}. Type 'help' for available commands.`;
+            newEntry.output = `Command not found: ${commandName}. Type 'help' for available commands.`;
         }
 
         setHistory(prev => [...prev, newEntry]);
