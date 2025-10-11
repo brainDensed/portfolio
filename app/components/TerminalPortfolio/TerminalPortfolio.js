@@ -735,7 +735,6 @@ IP: ${liveData.location?.ip || '103.211.50.32'} | Location: ${liveData.location?
 Total Commits (Today): ${liveData.totalCommits}
 Target Package: ₹15+ LPA
 -------------------------------------
-Type 'projects' or 'goals' to continue.
 `}
 `}
                                 </pre>
