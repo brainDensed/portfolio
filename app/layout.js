@@ -13,11 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Shivam — Terminal Portfolio",
-  description: "Interactive portfolio built like a terminal. Explore skills, projects, and real-time coding data.",
+  title: "Shivam - Portfolio",
+  description: "Interactive portfolio built like a terminal and an IDE. Explore skills, projects, and real-time coding data.",
   openGraph: {
-    title: "Shivam — Terminal Portfolio",
-    description: "A developer portfolio styled like a terminal with live data and goals.",
+    title: "Shivam - Portfolio",
+    description: "A developer portfolio styled like a terminal and an IDE with live data and goals.",
     url: "https://shivamhere.fyi",
     siteName: "Shivam Portfolio",
     images: [
@@ -25,7 +25,7 @@ export const metadata = {
         url: "/images/logo.png",
         width: 1200,
         height: 630,
-        alt: "Shivam — Terminal Portfolio Preview",
+        alt: "Shivam - Portfolio Preview",
       },
     ],
     locale: "en_US",
@@ -33,7 +33,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shivam — Terminal Portfolio",
+    title: "Shivam - Portfolio",
     description: "Interactive terminal-style developer portfolio.",
     images: ["/images/logo.png"],
   },
