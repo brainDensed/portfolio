@@ -724,21 +724,18 @@ const TerminalPortfolio = () => {
 
             // ESC to close modals
             if (e.key === 'Escape') {
-                const wasSkillTreeOpen = showSkillTree;
-                setShowMatrix(false);
-                setShowSkillTree(false);
-                setShowCard(false);
-
-                // Notify parent if SkillTree was closed
-                if (wasSkillTreeOpen) {
+                if (showSkillTree) {
+                    setShowSkillTree(false);
                     window.dispatchEvent(new CustomEvent('skillTreeToggle', { detail: { active: false } }));
                 }
+                if (showMatrix) setShowMatrix(false);
+                if (showCard) setShowCard(false);
             }
         };
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, []);
+    }, [showSkillTree, showMatrix, showCard]);
 
     return (
         <>
@@ -746,7 +743,13 @@ const TerminalPortfolio = () => {
             <HolographicCard isVisible={showCard} onClose={() => setShowCard(false)} />
             {showSkillTree && (
                 <div className="fixed inset-0 z-40 bg-black/95">
-                    <SkillTree isGUI={false} />
+                    <SkillTree
+                        isGUI={false}
+                        onClose={() => {
+                            setShowSkillTree(false);
+                            window.dispatchEvent(new CustomEvent('skillTreeToggle', { detail: { active: false } }));
+                        }}
+                    />
                 </div>
             )}
 
