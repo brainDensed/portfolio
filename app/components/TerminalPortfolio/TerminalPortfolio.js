@@ -755,26 +755,26 @@ const TerminalPortfolio = () => {
 
             {/* Page wrapper with padding; height constrained to viewport to avoid body scroll */}
             <div className="min-h-screen text-theme-primary font-mono">
-                <div className="container mx-auto p-6">
+                <div className="container-mobile p-6">
                     {/* Terminal Window */}
-                    <div className="terminal-window border border-theme rounded-xl shadow-2xl overflow-hidden max-w-5xl mx-auto h-[calc(100vh-3rem)] flex flex-col">
+                    <div className="terminal-window border border-theme rounded-xl shadow-2xl overflow-hidden w-full max-w-5xl mx-auto h-[calc(100vh-3rem)] flex flex-col sm:rounded-xl sm:border sm:shadow-2xl">
                         {/* Terminal Header with gamified UI */}
-                        <div className="bg-theme-surface px-4 py-3 flex items-center justify-between border-b border-theme">
-                            <div className="flex items-center gap-2">
-                                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                        <div className="bg-theme-surface px-2 sm:px-4 py-2 sm:py-3 flex items-center justify-between border-b border-theme">
+                            <div className="flex items-center gap-1 sm:gap-2">
+                                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+                                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
+                                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
                             </div>
-                            <div className="text-center">
-                                <div className="text-theme-secondary text-sm">Shivam's Interactive Terminal</div>
-                                <div className="text-theme-accent text-xs">Frontend + Web3</div>
+                            <div className="text-center flex-1">
+                                <div className="text-theme-secondary text-xs sm:text-sm">Shivam's Interactive Terminal</div>
+                                <div className="text-theme-accent text-xs hidden sm:block">Frontend + Web3</div>
                             </div>
-                            <div className="flex items-center gap-4">
-                                <div className="hidden md:block text-theme-primary text-sm">{currentTime}</div>
-                                {/* XP bar */}
-                                <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1 sm:gap-4">
+                                <div className="text-theme-primary text-xs sm:text-sm time-display">{currentTime}</div>
+                                {/* XP bar - hidden on mobile */}
+                                <div className="hidden md:flex items-center gap-2 xp-bar">
                                     <span className="text-xs text-theme-secondary">LVL 75</span>
-                                    <div className="w-28 h-2 bg-gray-800 rounded overflow-hidden border border-theme">
+                                    <div className="w-20 sm:w-28 h-2 bg-gray-800 rounded overflow-hidden border border-theme">
                                         <div className="h-full bg-gradient-theme" style={{ width: '85%' }}></div>
                                     </div>
                                     <span className="text-xs text-theme-secondary">8,500 XP</span>
@@ -785,7 +785,7 @@ const TerminalPortfolio = () => {
                         {/* Terminal Body is the only scrollable area */}
                         <div
                             ref={terminalRef}
-                            className="flex-1 overflow-y-auto p-4 pb-20 bg-theme-background select-text"
+                            className="flex-1 overflow-y-auto p-2 sm:p-4 pb-16 sm:pb-20 bg-theme-background select-text"
                             onClick={(e) => {
                                 // Only focus input if clicking on empty space, not on selectable text
                                 if (e.target === e.currentTarget) {
@@ -798,9 +798,9 @@ const TerminalPortfolio = () => {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 1 }}
-                                className="mb-4"
+                                className="mb-2 sm:mb-4"
                             >
-                                <pre className="text-theme-secondary text-xs">
+                                <pre className="text-theme-secondary text-xs sm:text-sm whitespace-pre-wrap overflow-x-auto">
                                     {`
  ██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗
  ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗
@@ -836,7 +836,7 @@ Target Package: ₹15+ LPA
                                         key={index}
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="mb-2"
+                                        className="mb-1 sm:mb-2"
                                     >
                                         <div className="flex items-center">
                                             <span className="text-theme-accent">shivam@portfolio</span>
@@ -846,12 +846,12 @@ Target Package: ₹15+ LPA
                                             <span className="text-theme-primary">{entry.command}</span>
                                         </div>
                                         {entry.output && (
-                                            <div className="ml-4 mt-1 whitespace-pre-wrap">
+                                            <div className="ml-2 sm:ml-4 mt-1 whitespace-pre-wrap text-sm sm:text-base">
                                                 {Array.isArray(entry.output)
                                                     ? entry.output.map((line, i) => (
-                                                        <div key={i} className="text-theme-secondary">{line}</div>
+                                                        <div key={i} className="text-theme-secondary break-words">{line}</div>
                                                     ))
-                                                    : <div className="text-theme-secondary">{entry.output}</div>
+                                                    : <div className="text-theme-secondary break-words">{entry.output}</div>
                                                 }
                                             </div>
                                         )}
@@ -860,10 +860,11 @@ Target Package: ₹15+ LPA
                             </AnimatePresence>
 
                             {/* Current Input Line */}
-                            <div className="flex items-center">
+                            <div className="flex items-center text-sm sm:text-base">
                                 <span className="text-theme-accent">shivam@portfolio</span>
                                 <span className="text-theme-secondary">:</span>
-                                <span className="text-theme-primary">{currentPath}</span>
+                                <span className="text-theme-primary hidden sm:inline">{currentPath}</span>
+                                <span className="text-theme-primary sm:hidden">~</span>
                                 <span className="text-theme-secondary">$ </span>
                                 <input
                                     ref={inputRef}
@@ -871,14 +872,15 @@ Target Package: ₹15+ LPA
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
                                     onKeyDown={handleKeyDown}
-                                    className="bg-transparent outline-none text-theme-primary flex-1 caret-theme-primary"
+                                    className="bg-transparent outline-none text-theme-primary flex-1 caret-theme-primary min-w-0"
                                     autoComplete="off"
                                     spellCheck="false"
+                                    style={{ fontSize: 'inherit' }}
                                 />
                                 <motion.span
                                     animate={{ opacity: [1, 0] }}
                                     transition={{ duration: 1, repeat: Infinity }}
-                                    className="text-theme-primary"
+                                    className="text-theme-primary ml-1"
                                 >
                                     █
                                 </motion.span>
@@ -886,10 +888,10 @@ Target Package: ₹15+ LPA
                         </div>
 
                         {/* Bottom status bar */}
-                        <div className="bg-theme-surface px-4 py-2 border-t border-theme text-xs text-theme-secondary flex items-center gap-4">
-                            <span>Quest: Type 'help' for commands</span>
-                            <span className="hidden sm:inline">↑↓ for history, Tab to complete</span>
-                            <span className="hidden md:inline">Ctrl+L to clear, ESC to close</span>
+                        <div className="bg-theme-surface px-2 sm:px-4 py-1 sm:py-2 border-t border-theme text-xs text-theme-secondary flex items-center gap-1 sm:gap-4">
+                            <span className="flex-1 truncate">Quest: Type 'help' for commands</span>
+                            <span className="hidden sm:inline text-xs">↑↓ for history</span>
+                            <span className="hidden md:inline text-xs">Ctrl+L to clear</span>
                         </div>
                     </div>
                 </div>

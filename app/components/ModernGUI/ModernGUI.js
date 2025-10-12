@@ -106,7 +106,7 @@ const getIDETheme = (currentTheme) => ({
 });
 
 // File Explorer Component
-const FileExplorer = ({ fileSystem, activeFile, onFileSelect, theme, ideTheme }) => {
+const FileExplorer = ({ fileSystem, activeFile, onFileSelect, theme, ideTheme, isVisible = true }) => {
   const renderFileTree = (node, path = '') => {
     if (node.type === 'file') {
       const fullPath = `${path}/${node.name}`;
@@ -122,7 +122,7 @@ const FileExplorer = ({ fileSystem, activeFile, onFileSelect, theme, ideTheme })
         >
           <div
             onClick={() => onFileSelect(fullPath)}
-            className={`flex items-center px-2 py-1 text-sm hover:bg-gray-700 rounded transition-colors`}
+            className={`flex items-center px-2 py-1 text-xs sm:text-sm hover:bg-gray-700 rounded transition-colors touch-target`}
             style={{
               backgroundColor: isActive ? ideTheme.accent : 'transparent',
               color: isActive ? ideTheme.activeFile : ideTheme.text,
@@ -130,7 +130,7 @@ const FileExplorer = ({ fileSystem, activeFile, onFileSelect, theme, ideTheme })
             }}
           >
             <span
-              className="mr-2"
+              className="mr-1 sm:mr-2"
               style={{ color: ideTheme.textSecondary }}
             >
               {node.name.endsWith('.md') ? '📄' : '📦'}
@@ -147,16 +147,16 @@ const FileExplorer = ({ fileSystem, activeFile, onFileSelect, theme, ideTheme })
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex items-center px-2 py-1 text-sm cursor-pointer"
+            className="flex items-center px-2 py-1 text-xs sm:text-sm cursor-pointer touch-target"
             style={{
               color: ideTheme.text,
               fontWeight: 'bold'
             }}
           >
-            <span className="mr-2" style={{ color: ideTheme.textSecondary }}>📁</span>
+            <span className="mr-1 sm:mr-2" style={{ color: ideTheme.textSecondary }}>📁</span>
             <span className="font-medium">{node.name}</span>
           </motion.div>
-          <div className="ml-4">
+          <div className="ml-2 sm:ml-4">
             {Object.entries(node.children).map(([name, child]) =>
               renderFileTree(child, `${path}/${node.name}`)
             )}
@@ -170,10 +170,10 @@ const FileExplorer = ({ fileSystem, activeFile, onFileSelect, theme, ideTheme })
 
   return (
     <div
-      className="w-64 h-full p-4 overflow-y-auto"
+      className={`${isVisible ? 'w-full sm:w-64' : 'w-0 sm:w-0'} h-full p-2 sm:p-4 overflow-y-auto transition-all duration-300`}
       style={{
         backgroundColor: ideTheme.sidebar,
-        borderRight: `1px solid ${ideTheme.border}`,
+        borderRight: isVisible && window.innerWidth >= 640 ? `1px solid ${ideTheme.border}` : 'none',
         scrollbarWidth: 'thin',
         scrollbarColor: `${ideTheme.accent} ${ideTheme.sidebar}`
       }}
@@ -193,8 +193,8 @@ const FileExplorer = ({ fileSystem, activeFile, onFileSelect, theme, ideTheme })
           background: ${ideTheme.textSecondary};
         }
       `}</style>
-      <div className="mb-4">
-        <h3 className="text-white font-bold text-sm uppercase tracking-wide">Explorer</h3>
+      <div className="mb-2 sm:mb-4">
+        <h3 className="text-white font-bold text-xs sm:text-sm uppercase tracking-wide">Explorer</h3>
       </div>
       {renderFileTree(fileSystem.portfolio)}
     </div>
@@ -205,25 +205,26 @@ const FileExplorer = ({ fileSystem, activeFile, onFileSelect, theme, ideTheme })
 const IDETabs = ({ openFiles, activeFile, onTabClick, onTabClose, ideTheme }) => {
   return (
     <div
-      className="flex border-b"
+      className="flex overflow-x-auto scrollbar-hide border-b tabs-mobile"
       style={{ backgroundColor: ideTheme.tabInactive, borderColor: ideTheme.border }}
     >
       {openFiles.map((file) => (
         <div
           key={file}
           onClick={() => onTabClick(file)}
-          className={`flex items-center px-3 py-2 border-r cursor-pointer group relative ${
+          className={`flex items-center px-2 sm:px-3 py-1 sm:py-2 border-r cursor-pointer group relative flex-shrink-0 touch-target ${
             activeFile === file ? 'bg-gray-800' : 'hover:bg-gray-700'
           }`}
           style={{
             backgroundColor: activeFile === file ? ideTheme.tabActive : 'transparent',
-            borderColor: ideTheme.border
+            borderColor: ideTheme.border,
+            minWidth: window.innerWidth < 640 ? '120px' : 'auto'
           }}
         >
-          <span className="mr-2 text-xs">
+          <span className="mr-1 sm:mr-2 text-xs">
             {file.endsWith('.md') ? '📄' : '📦'}
           </span>
-          <span className={`text-sm truncate ${activeFile === file ? 'text-white' : 'text-gray-300'}`}>
+          <span className={`text-xs sm:text-sm truncate ${activeFile === file ? 'text-white' : 'text-gray-300'}`}>
             {file.split('/').pop()}
           </span>
           <button
@@ -231,7 +232,7 @@ const IDETabs = ({ openFiles, activeFile, onTabClick, onTabClose, ideTheme }) =>
               e.stopPropagation();
               onTabClose(file);
             }}
-            className="ml-2 opacity-0 group-hover:opacity-100 hover:bg-red-600 rounded-sm w-4 h-4 flex items-center justify-center text-xs"
+            className="ml-1 sm:ml-2 opacity-0 group-hover:opacity-100 hover:bg-red-600 rounded-sm w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center text-xs touch-target"
           >
             ×
           </button>
@@ -251,20 +252,20 @@ const IDETabs = ({ openFiles, activeFile, onTabClick, onTabClose, ideTheme }) =>
 const StatusBar = ({ activeFile, theme, ideTheme }) => {
   return (
     <div
-      className="flex items-center justify-between px-4 py-1 text-xs"
+      className="flex items-center justify-between px-2 sm:px-4 py-1 text-xs"
       style={{
         backgroundColor: ideTheme.sidebar,
         borderTop: `1px solid ${ideTheme.border}`,
         color: ideTheme.textSecondary
       }}
     >
-      <div className="flex items-center space-x-4">
-        <span>● {activeFile ? '1 file open' : 'No file open'}</span>
+      <div className="flex items-center space-x-2 sm:space-x-4">
+        <span className="truncate">● {activeFile ? '1 file open' : 'No file open'}</span>
       </div>
-      <div className="flex items-center space-x-4">
-        <span>Ln 1, Col 1</span>
-        <span>UTF-8</span>
-        <span>JavaScript</span>
+      <div className="flex items-center space-x-1 sm:space-x-4">
+        <span className="hidden sm:inline">Ln 1, Col 1</span>
+        <span className="hidden md:inline">UTF-8</span>
+        <span className="hidden lg:inline">JavaScript</span>
       </div>
     </div>
   );
@@ -279,6 +280,8 @@ const ModernGUI = () => {
   const [showMatrix, setShowMatrix] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showThemeSelector, setShowThemeSelector] = useState(false);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+  const [headerPaddingLeft, setHeaderPaddingLeft] = useState('60px');
   const { getCurrentThemeInfo, changeTheme, getAvailableThemes } = useTheme();
   const currentTheme = getCurrentThemeInfo();
   const ideTheme = getIDETheme(currentTheme);
@@ -290,6 +293,29 @@ const ModernGUI = () => {
     setIsLoaded(true);
     setIsInitialized(true);
   }, []);
+
+  // Handle responsive sidebar behavior and header padding
+   useEffect(() => {
+     const handleResize = () => {
+       // Sidebar behavior is now controlled by user preference
+       // Just ensure proper state management on resize
+       const isMobile = window.innerWidth < 640;
+
+       // Update header padding based on screen size
+       setHeaderPaddingLeft(isMobile ? '16px' : '20px');
+
+       // On mobile, if sidebar was visible but should be overlay, keep it manageable
+       if (isMobile && isSidebarVisible) {
+         // Keep it visible as overlay on mobile
+       }
+     };
+
+     // Set initial state based on screen size
+     handleResize();
+
+     window.addEventListener('resize', handleResize);
+     return () => window.removeEventListener('resize', handleResize);
+   }, [isSidebarVisible]);
 
   // Improved theme synchronization effect
   useEffect(() => {
@@ -738,31 +764,138 @@ The requested file could not be loaded or does not exist.
       <div className="h-screen flex flex-col overflow-hidden" style={{ backgroundColor: ideTheme.background }}>
         {/* IDE Header - Centered and Clean */}
         <div
-          className="flex items-center justify-center px-4 py-3 border-b relative"
+          className="flex items-center justify-between px-2 sm:px-4 py-2 sm:py-3 border-b relative"
           style={{
             backgroundColor: ideTheme.sidebar,
             borderColor: ideTheme.border,
-            color: ideTheme.text
+            color: ideTheme.text,
+            paddingLeft: headerPaddingLeft
           }}
         >
-          <div className="flex items-center">
-            <span className="font-bold text-lg">SHIVAM.EXE - Portfolio IDE</span>
-          </div>
+          {/* Hamburger Button - Left */}
+          <button
+            onClick={() => setIsSidebarVisible(!isSidebarVisible)}
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors touch-target touch-button shadow-lg mr-1 sm:mr-2"
+            style={{
+              color: ideTheme.textSecondary,
+              backgroundColor: ideTheme.sidebar,
+              border: `1px solid ${ideTheme.border}`,
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+            }}
+            title={isSidebarVisible ? "Hide Sidebar" : "Show Sidebar"}
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {isSidebarVisible ? (
+                <>
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </>
+              ) : (
+                <>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <line x1="3" y1="12" x2="21" y2="12"></line>
+                  <line x1="3" y1="18" x2="21" y2="18"></line>
+                </>
+              )}
+            </svg>
+          </button>
+
+          {/* Header Title - Center */}
+          <span className="font-bold text-sm sm:text-lg flex-1 text-center">SHIVAM.EXE - Portfolio IDE</span>
         </div>
 
         {/* IDE Main Area */}
         <div className="flex flex-1 overflow-hidden">
-          {/* File Explorer Sidebar */}
-          <FileExplorer
-            fileSystem={fileSystem}
-            activeFile={activeFile}
-            onFileSelect={handleFileSelect}
-            theme={currentTheme}
-            ideTheme={ideTheme}
-          />
+          {/* Desktop File Explorer Sidebar */}
+          <AnimatePresence mode="wait">
+            {isSidebarVisible && window.innerWidth >= 640 && (
+              <motion.div
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: 256, opacity: 1 }}
+                exit={{ width: 0, opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="hidden sm:block"
+              >
+                <FileExplorer
+                  fileSystem={fileSystem}
+                  activeFile={activeFile}
+                  onFileSelect={handleFileSelect}
+                  theme={currentTheme}
+                  ideTheme={ideTheme}
+                  isVisible={isSidebarVisible}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Mobile Sidebar Overlay */}
+          <AnimatePresence>
+            {isSidebarVisible && window.innerWidth < 640 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="sm:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+                onClick={() => setIsSidebarVisible(false)}
+              />
+            )}
+          </AnimatePresence>
+
+          {/* Mobile Sidebar */}
+          <AnimatePresence>
+            {isSidebarVisible && window.innerWidth < 640 && (
+              <motion.div
+                initial={{ x: "-100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "-100%" }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="sm:hidden fixed left-0 top-0 h-full z-50"
+                style={{
+                  width: '280px',
+                  backgroundColor: ideTheme.sidebar,
+                  borderRight: `1px solid ${ideTheme.border}`
+                }}
+              >
+                <div className="p-4 h-full overflow-y-auto">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-white font-bold text-sm uppercase tracking-wide">Explorer</h3>
+                    <button
+                      onClick={() => setIsSidebarVisible(false)}
+                      className="text-white hover:text-gray-300 touch-target"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </button>
+                  </div>
+                  <FileExplorer
+                    fileSystem={fileSystem}
+                    activeFile={activeFile}
+                    onFileSelect={(filePath) => {
+                      handleFileSelect(filePath);
+                      // Don't auto-close on mobile after file selection
+                    }}
+                    theme={currentTheme}
+                    ideTheme={ideTheme}
+                    isVisible={isSidebarVisible}
+                  />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Editor Area */}
-          <div className="flex-1 flex flex-col min-h-0">
+          <div className={`flex-1 flex flex-col min-h-0 ${!isSidebarVisible ? 'sm:ml-0' : ''}`}>
             {/* Tabs */}
             <IDETabs
               openFiles={openFiles}
@@ -774,7 +907,7 @@ The requested file could not be loaded or does not exist.
 
             {/* Editor Content */}
             <div
-              className="flex-1 overflow-y-auto min-h-0 pl-10 pr-6 pt-6 pb-6"
+              className="flex-1 overflow-y-auto min-h-0 p-2 sm:pl-10 sm:pr-6 sm:pt-6 sm:pb-6"
               style={{
                 scrollbarWidth: 'thin',
                 scrollbarColor: `${ideTheme.accent} ${ideTheme.background}`
@@ -830,40 +963,40 @@ The requested file could not be loaded or does not exist.
 
         {/* VS Code Style Activity Bar - Bottom Left */}
         <div
-          className="fixed left-4 bottom-16 flex flex-col space-y-1 z-40"
+          className="activity-bar-mobile"
           style={{ backgroundColor: 'transparent' }}
         >
           <button
             onClick={() => handleQuickAction('themes')}
-            className="w-10 h-10 flex items-center justify-center rounded hover:bg-gray-700 transition-colors group"
+            className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded hover:bg-gray-700 transition-colors group touch-target touch-button"
             style={{ backgroundColor: ideTheme.sidebar }}
             title="Change Theme"
           >
-            <span className="text-lg">🎨</span>
+            <span className="text-sm sm:text-lg">🎨</span>
           </button>
           <button
             onClick={() => handleQuickAction('card')}
-            className="w-10 h-10 flex items-center justify-center rounded hover:bg-gray-700 transition-colors group"
+            className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded hover:bg-gray-700 transition-colors group touch-target touch-button"
             style={{ backgroundColor: ideTheme.sidebar }}
             title="Business Card"
           >
-            <span className="text-lg">💳</span>
+            <span className="text-sm sm:text-lg">💳</span>
           </button>
           <button
             onClick={() => handleQuickAction('skillTree')}
-            className="w-10 h-10 flex items-center justify-center rounded hover:bg-gray-700 transition-colors group"
+            className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded hover:bg-gray-700 transition-colors group touch-target touch-button"
             style={{ backgroundColor: ideTheme.sidebar }}
             title="Skills Tree"
           >
-            <span className="text-lg">🌳</span>
+            <span className="text-sm sm:text-lg">🌳</span>
           </button>
           <button
             onClick={() => handleQuickAction('matrix')}
-            className="w-10 h-10 flex items-center justify-center rounded hover:bg-gray-700 transition-colors group"
+            className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded hover:bg-gray-700 transition-colors group touch-target touch-button"
             style={{ backgroundColor: ideTheme.sidebar }}
             title="Matrix Mode"
           >
-            <span className="text-lg">💻</span>
+            <span className="text-sm sm:text-lg">💻</span>
           </button>
         </div>
 
@@ -882,7 +1015,7 @@ The requested file could not be loaded or does not exist.
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0, y: 20 }}
                 transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-                className="w-full max-w-lg max-h-[80vh] overflow-hidden"
+                className="w-full max-w-sm sm:max-w-lg max-h-[85vh] sm:max-h-[80vh] overflow-hidden mx-4"
                 style={{
                   background: 'rgba(15, 23, 42, 0.98)',
                   backdropFilter: 'blur(20px)',
@@ -894,7 +1027,7 @@ The requested file could not be loaded or does not exist.
                 onClick={(e) => e.stopPropagation()}
               >
                 <div
-                  className="flex items-center justify-between p-6 border-b"
+                  className="flex items-center justify-between p-3 sm:p-6 border-b"
                   style={{
                     borderColor: ideTheme.border,
                     backgroundColor: ideTheme.sidebar
@@ -902,7 +1035,7 @@ The requested file could not be loaded or does not exist.
                 >
                   <div>
                     <h3
-                      className="text-2xl font-bold"
+                      className="text-lg sm:text-2xl font-bold"
                       style={{
                         ...MATERIAL3.typography.headlineSmall,
                         color: ideTheme.text
@@ -911,7 +1044,7 @@ The requested file could not be loaded or does not exist.
                       Choose Theme
                     </h3>
                     <p
-                      className="mt-1"
+                      className="mt-1 text-xs sm:text-sm"
                       style={{
                         ...MATERIAL3.typography.bodySmall,
                         color: ideTheme.textSecondary
@@ -924,7 +1057,7 @@ The requested file could not be loaded or does not exist.
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => setShowThemeSelector(false)}
-                    className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-colors touch-target touch-button"
                     style={{
                       backgroundColor: 'rgba(255, 255, 255, 0.1)',
                       color: ideTheme.textSecondary
@@ -951,7 +1084,7 @@ The requested file could not be loaded or does not exist.
                 </div>
 
                 <div
-                  className="p-6 max-h-96 overflow-y-auto"
+                  className="p-3 sm:p-6 max-h-80 sm:max-h-96 overflow-y-auto"
                   style={{
                     backgroundColor: ideTheme.background,
                     // Custom scrollbar styling to match terminal
@@ -990,7 +1123,7 @@ The requested file could not be loaded or does not exist.
                             window.dispatchEvent(new CustomEvent('themeChanged'));
                           }, 100);
                         }}
-                        className={`w-full text-left p-4 rounded-xl transition-all duration-200 relative overflow-hidden`}
+                        className={`w-full text-left p-3 sm:p-4 rounded-xl transition-all duration-200 relative overflow-hidden touch-target touch-button`}
                         style={{
                           background: getCurrentThemeInfo().key === theme.key
                             ? `linear-gradient(135deg, ${ideTheme.accent}20, ${ideTheme.text}15)`
@@ -1016,9 +1149,9 @@ The requested file could not be loaded or does not exist.
                         }}
                       >
                         <div className="flex items-center justify-between">
-                          <div className="flex-1">
+                          <div className="flex-1 min-w-0">
                             <div
-                              className="font-semibold"
+                              className="font-semibold text-sm sm:text-base truncate"
                               style={{
                                 ...MATERIAL3.typography.titleMedium,
                                 color: getCurrentThemeInfo().key === theme.key
@@ -1029,7 +1162,7 @@ The requested file could not be loaded or does not exist.
                               {theme.name}
                             </div>
                             <div
-                              className="mt-1"
+                              className="mt-1 text-xs sm:text-sm truncate"
                               style={{
                                 ...MATERIAL3.typography.bodySmall,
                                 color: ideTheme.textSecondary

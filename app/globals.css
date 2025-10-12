@@ -447,3 +447,411 @@ body {
 .bg-gradient-theme {
   background: linear-gradient(to right, var(--theme-primary), var(--theme-accent));
 }
+
+/* Mobile-First Responsive Design */
+@layer utilities {
+  /* Responsive Container Utilities */
+  .container-mobile {
+    @apply w-full px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-mobile-narrow {
+    @apply w-full max-w-sm px-4 mx-auto;
+  }
+
+  .container-mobile-wide {
+    @apply w-full max-w-6xl px-4 mx-auto;
+  }
+
+  /* Mobile Typography Scale */
+  .text-mobile-xs { font-size: 0.75rem; line-height: 1rem; }
+  .text-mobile-sm { font-size: 0.875rem; line-height: 1.25rem; }
+  .text-mobile-base { font-size: 1rem; line-height: 1.5rem; }
+  .text-mobile-lg { font-size: 1.125rem; line-height: 1.75rem; }
+  .text-mobile-xl { font-size: 1.25rem; line-height: 1.75rem; }
+  .text-mobile-2xl { font-size: 1.5rem; line-height: 2rem; }
+  .text-mobile-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+
+  /* Mobile Spacing */
+  .space-mobile-xs > * + * { margin-top: 0.25rem; }
+  .space-mobile-sm > * + * { margin-top: 0.5rem; }
+  .space-mobile-md > * + * { margin-top: 0.75rem; }
+  .space-mobile-lg > * + * { margin-top: 1rem; }
+  .space-mobile-xl > * + * { margin-top: 1.5rem; }
+
+  /* Mobile Padding */
+  .p-mobile-xs { padding: 0.25rem; }
+  .p-mobile-sm { padding: 0.5rem; }
+  .p-mobile-md { padding: 0.75rem; }
+  .p-mobile-lg { padding: 1rem; }
+  .p-mobile-xl { padding: 1.5rem; }
+
+  /* Mobile Margin */
+  .m-mobile-xs { margin: 0.25rem; }
+  .m-mobile-sm { margin: 0.5rem; }
+  .m-mobile-md { margin: 0.75rem; }
+  .m-mobile-lg { margin: 1rem; }
+  .m-mobile-xl { margin: 1.5rem; }
+
+  /* Mobile Touch Targets */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Mobile Safe Areas */
+  .safe-top { padding-top: env(safe-area-inset-top); }
+  .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+  .safe-left { padding-left: env(safe-area-inset-left); }
+  .safe-right { padding-right: env(safe-area-inset-right); }
+
+  /* Mobile Responsive Terminal Window */
+  .terminal-mobile {
+    @apply w-full h-screen max-h-screen overflow-hidden;
+  }
+
+  .terminal-mobile .terminal-window {
+    @apply w-full h-full max-w-none mx-0 rounded-none;
+  }
+
+  /* Mobile Font Scaling */
+  .text-responsive-xs {
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+  }
+
+  .text-responsive-sm {
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+  }
+
+  .text-responsive-base {
+    font-size: clamp(1rem, 3vw, 1.125rem);
+  }
+
+  .text-responsive-lg {
+    font-size: clamp(1.125rem, 4vw, 1.25rem);
+  }
+
+  .text-responsive-xl {
+    font-size: clamp(1.25rem, 5vw, 1.5rem);
+  }
+
+  /* Mobile-optimized spacing that scales with viewport */
+  .space-responsive-sm > * + * {
+    margin-top: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  .space-responsive-md > * + * {
+    margin-top: clamp(0.75rem, 3vw, 1.5rem);
+  }
+
+  .space-responsive-lg > * + * {
+    margin-top: clamp(1rem, 4vw, 2rem);
+  }
+
+  /* Fluid padding for mobile */
+  .p-responsive-sm {
+    padding: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  .p-responsive-md {
+    padding: clamp(0.75rem, 3vw, 1.5rem);
+  }
+
+  .p-responsive-lg {
+    padding: clamp(1rem, 4vw, 2rem);
+  }
+
+  /* Mobile Sidebar Collapse */
+  .sidebar-mobile {
+    @apply fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0;
+  }
+
+  .sidebar-mobile.hidden {
+    @apply -translate-x-full lg:translate-x-0;
+  }
+
+  /* Mobile Tab Scroll */
+  .tabs-mobile {
+    @apply flex overflow-x-auto scrollbar-hide;
+  }
+
+  .tabs-mobile::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Mobile Activity Bar */
+  .activity-bar-mobile {
+    @apply fixed left-2 bottom-4 z-40 flex flex-col space-y-2 lg:left-4 lg:bottom-16;
+  }
+
+  /* Mobile Button Stack */
+  .button-stack-mobile {
+    @apply flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2;
+  }
+
+  /* Mobile Card Grid */
+  .card-grid-mobile {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  /* Mobile Text Input */
+  .input-mobile {
+    @apply w-full px-3 py-2 text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500;
+  }
+
+  /* Hide scrollbar for mobile */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Mobile Breakpoints */
+@media (max-width: 640px) {
+  /* Mobile-specific terminal styling */
+  .terminal-window {
+    @apply rounded-none border-0;
+  }
+
+  .terminal-window .container {
+    @apply px-2;
+  }
+
+  /* Mobile header adjustments */
+  .terminal-window header {
+    @apply flex-col space-y-2 px-2 py-2;
+  }
+
+  .terminal-window header .flex {
+    @apply justify-center;
+  }
+
+  /* Mobile XP bar */
+  .terminal-window .xp-bar {
+    @apply hidden;
+  }
+
+  /* Mobile time display */
+  .terminal-window .time-display {
+    @apply text-xs;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Tablet adjustments */
+  .terminal-window {
+    @apply max-w-none mx-2;
+  }
+
+  .terminal-window header {
+    @apply px-3 py-2;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Small desktop adjustments */
+  .terminal-window {
+    @apply max-w-4xl;
+  }
+}
+
+/* Mobile Typography Optimization */
+@media (max-width: 768px) {
+  /* Improve text rendering on mobile */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Better line heights for mobile reading */
+  p, li, div {
+    line-height: 1.6;
+  }
+
+  /* Optimize monospace fonts for mobile */
+  code, pre, .font-mono {
+    font-feature-settings: "liga" 0;
+    font-variant-ligatures: none;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .hover\:bg-gray-700:hover {
+    background-color: transparent;
+  }
+
+  .group:hover .group-hover\:opacity-100 {
+    opacity: 1;
+  }
+
+  /* Always show touch targets */
+  .touch-target {
+    opacity: 1;
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Sharper borders and shadows on high DPI displays */
+  .terminal-window {
+    border-width: 0.5px;
+  }
+
+  .material-card {
+    border-width: 0.5px;
+  }
+}
+
+/* Landscape mobile optimization */
+@media (max-width: 896px) and (orientation: landscape) {
+  /* Reduce vertical padding in landscape mode */
+  .terminal-window {
+    height: calc(100vh - 2rem);
+  }
+
+  .terminal-window header {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .terminal-window .overflow-y-auto {
+    padding-bottom: 4rem;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+/* Remove hover states that don't work on touch */
+.hover\:scale-105:hover {
+  transform: none;
+}
+
+.hover\:bg-opacity-80:hover {
+  background-opacity: 1;
+}
+
+/* Always show focus indicators for keyboard navigation */
+.focus\:ring-2:focus {
+  ring-width: 2px;
+  ring-opacity: 0.5;
+}
+
+/* Touch-friendly button states */
+.touch-button {
+  transition: all 0.15s ease;
+  -webkit-tap-highlight-color: rgba(0, 255, 0, 0.1);
+}
+
+.touch-button:active {
+  transform: scale(0.98);
+  background-color: rgba(0, 255, 0, 0.2);
+}
+
+/* Touch-friendly interactive elements */
+button, .cursor-pointer {
+  -webkit-tap-highlight-color: rgba(0, 255, 0, 0.1);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+/* Improve tap targets */
+button, a, [role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Better text selection on touch */
+.select-text {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Touch scroll momentum */
+.overflow-auto, .overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+}
+}
+
+/* Improved focus management for accessibility */
+@media (max-width: 768px) {
+/* Visible focus indicators on mobile */
+:focus-visible {
+  outline: 2px solid #00ff00;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Better focus for input elements */
+input:focus, textarea:focus, select:focus {
+  outline: 2px solid #00ff00;
+  outline-offset: 1px;
+  box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.1);
+}
+
+/* Remove focus outline for mouse users but keep for keyboard */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+}
+
+/* Touch gesture improvements */
+@media (max-width: 768px) {
+/* Smoother scrolling */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Prevent zoom on double tap for certain elements */
+.no-zoom {
+  touch-action: manipulation;
+}
+
+/* Better momentum scrolling */
+.terminal-window .overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: y proximity;
+}
+}
+
+/* Mobile interaction feedback */
+@media (hover: none) {
+/* Active states for touch feedback */
+.touch-feedback:active {
+  background-color: rgba(0, 255, 0, 0.1);
+  transform: scale(0.98);
+}
+
+/* Ripple effect for buttons */
+.ripple-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(0, 255, 0, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+.ripple-button:active::after {
+  width: 300px;
+  height: 300px;
+}
+}
