@@ -193,7 +193,7 @@ const FileExplorer = ({ fileSystem, activeFile, onFileSelect, theme, ideTheme, i
           background: ${ideTheme.textSecondary};
         }
       `}</style>
-      <div className="mb-2 sm:mb-4">
+      <div className="mb-2 sm:mb-4 hidden sm:block">
         <h3 className="text-white font-bold text-xs sm:text-sm uppercase tracking-wide">Explorer</h3>
       </div>
       {renderFileTree(fileSystem.portfolio)}
