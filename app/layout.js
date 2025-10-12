@@ -15,6 +15,21 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Shivam - Portfolio",
   description: "Interactive portfolio built like a terminal and an IDE. Explore skills, projects, and real-time coding data.",
+  keywords: [
+    "Web3 Developer",
+    "Full Stack Developer",
+    "React",
+    "Next.js",
+    "Blockchain",
+    "Solidity",
+    "Portfolio",
+    "Frontend",
+    "Smart Contracts",
+    "Terminal Portfolio",
+    "Shivam Nilay",
+    "Gamified Portfolio",
+    "Award Winning Developer"
+  ],
   openGraph: {
     title: "Shivam - Portfolio",
     description: "A developer portfolio styled like a terminal and an IDE with live data and goals.",
