@@ -165,8 +165,28 @@ const FileExplorer = ({ fileSystem, activeFile, onFileSelect, theme, ideTheme })
   return (
     <div
       className="w-64 h-full p-4 overflow-y-auto"
-      style={{ backgroundColor: ideTheme.sidebar, borderRight: `1px solid ${ideTheme.border}` }}
+      style={{
+        backgroundColor: ideTheme.sidebar,
+        borderRight: `1px solid ${ideTheme.border}`,
+        scrollbarWidth: 'thin',
+        scrollbarColor: `${ideTheme.accent} ${ideTheme.sidebar}`
+      }}
     >
+      <style jsx>{`
+        div::-webkit-scrollbar {
+          width: 8px;
+        }
+        div::-webkit-scrollbar-track {
+          background: ${ideTheme.sidebar};
+        }
+        div::-webkit-scrollbar-thumb {
+          background: ${ideTheme.accent};
+          border-radius: 4px;
+        }
+        div::-webkit-scrollbar-thumb:hover {
+          background: ${ideTheme.textSecondary};
+        }
+      `}</style>
       <div className="mb-4">
         <h3 className="text-white font-bold text-sm uppercase tracking-wide">Explorer</h3>
       </div>
@@ -748,7 +768,28 @@ The requested file could not be loaded or does not exist.
             />
 
             {/* Editor Content */}
-            <div className="flex-1 overflow-y-auto min-h-0 pl-10 pr-6 pt-6 pb-6">
+            <div
+              className="flex-1 overflow-y-auto min-h-0 pl-10 pr-6 pt-6 pb-6"
+              style={{
+                scrollbarWidth: 'thin',
+                scrollbarColor: `${ideTheme.accent} ${ideTheme.background}`
+              }}
+            >
+              <style jsx>{`
+                div::-webkit-scrollbar {
+                  width: 8px;
+                }
+                div::-webkit-scrollbar-track {
+                  background: ${ideTheme.background};
+                }
+                div::-webkit-scrollbar-thumb {
+                  background: ${ideTheme.accent};
+                  border-radius: 4px;
+                }
+                div::-webkit-scrollbar-thumb:hover {
+                  background: ${ideTheme.textSecondary};
+                }
+              `}</style>
               <motion.div
                 key={activeFile}
                 initial={{ opacity: 0, y: 10 }}
