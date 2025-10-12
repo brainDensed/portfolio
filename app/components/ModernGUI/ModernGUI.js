@@ -828,7 +828,7 @@ The requested file could not be loaded or does not exist.
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-6"
+              className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-6"
               onClick={() => setShowThemeSelector(false)}
             >
               <motion.div
@@ -838,10 +838,10 @@ The requested file could not be loaded or does not exist.
                 transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                 className="w-full max-w-lg max-h-[80vh] overflow-hidden"
                 style={{
-                  background: 'rgba(30, 41, 59, 0.95)',
+                  background: 'rgba(15, 23, 42, 0.98)',
                   backdropFilter: 'blur(20px)',
                   WebkitBackdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(148, 163, 184, 0.2)',
+                  border: `1px solid ${ideTheme.border}`,
                   borderRadius: MATERIAL3.borderRadius.large,
                   boxShadow: MATERIAL3.elevation.level5
                 }}
@@ -849,21 +849,27 @@ The requested file could not be loaded or does not exist.
               >
                 <div
                   className="flex items-center justify-between p-6 border-b"
-                  style={{ borderColor: 'rgba(148, 163, 184, 0.1)' }}
+                  style={{
+                    borderColor: ideTheme.border,
+                    backgroundColor: ideTheme.sidebar
+                  }}
                 >
                   <div>
                     <h3
                       className="text-2xl font-bold"
                       style={{
                         ...MATERIAL3.typography.headlineSmall,
-                        color: currentTheme.colors.primary
+                        color: ideTheme.text
                       }}
                     >
                       Choose Theme
                     </h3>
                     <p
-                      className="text-slate-400 mt-1"
-                      style={MATERIAL3.typography.bodySmall}
+                      className="mt-1"
+                      style={{
+                        ...MATERIAL3.typography.bodySmall,
+                        color: ideTheme.textSecondary
+                      }}
                     >
                       Select your preferred color scheme
                     </p>
@@ -872,9 +878,18 @@ The requested file could not be loaded or does not exist.
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => setShowThemeSelector(false)}
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-colors"
+                    className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
                     style={{
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)'
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                      color: ideTheme.textSecondary
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                      e.target.style.color = ideTheme.text;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                      e.target.style.color = ideTheme.textSecondary;
                     }}
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -889,7 +904,31 @@ The requested file could not be loaded or does not exist.
                   </motion.button>
                 </div>
 
-                <div className="p-6 max-h-96 overflow-y-auto">
+                <div
+                  className="p-6 max-h-96 overflow-y-auto"
+                  style={{
+                    backgroundColor: ideTheme.background,
+                    // Custom scrollbar styling to match terminal
+                    scrollbarWidth: 'thin',
+                    scrollbarColor: `${ideTheme.accent} ${ideTheme.sidebar}`
+                  }}
+                >
+                  <style jsx>{`
+                    div::-webkit-scrollbar {
+                      width: 8px;
+                    }
+                    div::-webkit-scrollbar-track {
+                      background: ${ideTheme.sidebar};
+                      border-radius: 4px;
+                    }
+                    div::-webkit-scrollbar-thumb {
+                      background: ${ideTheme.accent};
+                      border-radius: 4px;
+                    }
+                    div::-webkit-scrollbar-thumb:hover {
+                      background: ${ideTheme.textSecondary};
+                    }
+                  `}</style>
                   <div className="grid gap-3">
                     {getAvailableThemes().map((theme, index) => (
                       <motion.button
@@ -905,27 +944,28 @@ The requested file could not be loaded or does not exist.
                             window.dispatchEvent(new CustomEvent('themeChanged'));
                           }, 100);
                         }}
-                        className={`w-full text-left p-4 rounded-xl transition-all duration-200 relative overflow-hidden ${
-                          getCurrentThemeInfo().key === theme.key
-                            ? 'text-white'
-                            : 'text-slate-400 hover:text-white'
-                        }`}
+                        className={`w-full text-left p-4 rounded-xl transition-all duration-200 relative overflow-hidden`}
                         style={{
                           background: getCurrentThemeInfo().key === theme.key
-                            ? `linear-gradient(135deg, ${currentTheme.colors.primary}20, ${currentTheme.colors.secondary}15)`
-                            : 'rgba(255, 255, 255, 0.05)',
+                            ? `linear-gradient(135deg, ${ideTheme.accent}20, ${ideTheme.text}15)`
+                            : ideTheme.tabInactive,
                           border: getCurrentThemeInfo().key === theme.key
-                            ? `1px solid ${currentTheme.colors.primary}40`
-                            : '1px solid rgba(255, 255, 255, 0.1)'
+                            ? `1px solid ${ideTheme.accent}40`
+                            : `1px solid ${ideTheme.border}`,
+                          color: getCurrentThemeInfo().key === theme.key ? ideTheme.text : ideTheme.textSecondary
                         }}
                         onMouseEnter={(e) => {
                           if (getCurrentThemeInfo().key !== theme.key) {
-                            e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                            e.target.style.backgroundColor = ideTheme.activeFile;
+                            e.target.style.borderColor = ideTheme.accent;
+                            e.target.style.color = ideTheme.text;
                           }
                         }}
                         onMouseLeave={(e) => {
                           if (getCurrentThemeInfo().key !== theme.key) {
-                            e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                            e.target.style.backgroundColor = ideTheme.tabInactive;
+                            e.target.style.borderColor = ideTheme.border;
+                            e.target.style.color = ideTheme.textSecondary;
                           }
                         }}
                       >
@@ -936,15 +976,18 @@ The requested file could not be loaded or does not exist.
                               style={{
                                 ...MATERIAL3.typography.titleMedium,
                                 color: getCurrentThemeInfo().key === theme.key
-                                  ? currentTheme.colors.primary
-                                  : 'inherit'
+                                  ? ideTheme.accent
+                                  : ideTheme.text
                               }}
                             >
                               {theme.name}
                             </div>
                             <div
-                              className="text-slate-400 mt-1"
-                              style={MATERIAL3.typography.bodySmall}
+                              className="mt-1"
+                              style={{
+                                ...MATERIAL3.typography.bodySmall,
+                                color: ideTheme.textSecondary
+                              }}
                             >
                               {theme.description}
                             </div>
@@ -955,8 +998,8 @@ The requested file could not be loaded or does not exist.
                               animate={{ scale: 1 }}
                               className="w-5 h-5 rounded-full flex items-center justify-center"
                               style={{
-                                backgroundColor: currentTheme.colors.primary,
-                                boxShadow: `0 0 0 2px ${currentTheme.colors.primary}40`
+                                backgroundColor: ideTheme.accent,
+                                boxShadow: `0 0 0 2px ${ideTheme.accent}40`
                               }}
                             >
                               <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
