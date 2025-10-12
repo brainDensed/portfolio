@@ -395,13 +395,12 @@ const ModernGUI = () => {
 
 ## 🚀 Frontend Developer | Web3 Specialist
 
-> **Status**: Open to opportunities (₹15 LPA+)
+> **Status**: Open to opportunities
 > **Location**: Darbhanga, Bihar, India
 
 ### 🔥 Quick Stats
 - **2+ Years Experience** - Professional frontend development
 - **Award Winner** - HackOdisha 5.0 - Verbwire Track
-- **Target Package** - ₹15 LPA+ for senior roles
 
 ### 🛠️ Tech Stack
 - **Frontend**: React, Next.js, TypeScript, Tailwind CSS
@@ -442,7 +441,7 @@ portfolio/
 - Specialized in web technologies and algorithms
 
 ### 💼 Professional Summary
-Passionate developer with expertise in React ecosystem and Web3 technologies. Currently seeking opportunities with **₹15 LPA+** package to contribute to innovative projects and grow as a senior developer.
+Passionate developer with expertise in React ecosystem and Web3 technologies. Currently seeking opportunities with high package to contribute to innovative projects and grow as a senior developer.
 
 ### 🌍 Location & Availability
 - **Location**: Darbhanga, Bihar, India

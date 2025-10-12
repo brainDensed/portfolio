@@ -2,7 +2,7 @@
 
 Welcome to my **revolutionary terminal-based portfolio**! This isn't just another portfolio website - it's an interactive command-line experience that showcases cutting-edge web development skills and innovative UI/UX design.
 
-## 🎯 Vision: Targeting 15 LPA+ Package
+## 🎯 Vision: To be counted among some top developers
 
 This portfolio is designed to demonstrate the level of innovation and technical expertise required for top-tier developer positions. Every feature is crafted to showcase skills that put me in the **top 1% of developers**.
 
@@ -74,7 +74,7 @@ easter        # Hidden surprises
 
 ```bash
 # Clone the repository
-git clone https://github.com/shivam-dev/terminal-portfolio
+git clone https://github.com/brainDensed/portfolio
 
 # Install dependencies
 npm install
@@ -105,16 +105,14 @@ npm run build
 
 ## 🌐 Live Demo
 
-Experience the future of developer portfolios: **[https://shivam.dev](https://shivam.dev)**
+**[Check it out](https://shivamhere.fyi)**
 
 ## 📞 Contact
 
 Ready to discuss opportunities? Use the terminal commands or reach out directly:
 
-- **Email:** shivam.nilay46@gmail.com
-- **Phone:** +91 8789581642
 - **LinkedIn:** /in/shivam-nilay
-- **GitHub:** /shivam-nilay
+- **GitHub:** /brainDensed
 - **Location:** Darbhanga, Bihar, India
 
 ## 🏆 Notable Achievements

@@ -154,7 +154,6 @@ const SkillTree = ({ isGUI = false }) => {
             <div>Total Skills: 20</div>
             <div>Unlocked: 19</div>
             <div>Average Level: 82%</div>
-            <div>Target: 15LPA+ Package</div>
           </div>
         </motion.div>
       </div>

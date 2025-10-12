@@ -76,7 +76,7 @@ const TerminalPortfolio = () => {
                 "╠════════════════════════════════════════════════════════════════════╣",
                 "║ Frontend Developer | Web3 Specialist                               ║",
                 "║ Location: Darbhanga, Bihar, India                                  ║",
-                "║ Targeting: ₹15 LPA+ Package                                        ║",
+                "║ Targeting: high Package                                            ║",
                 "║                                                                    ║",
                 "║ 2+ Years Frontend Development Experience                           ║",
                 "║ Blockchain & DeFi Enthusiast                                       ║",
