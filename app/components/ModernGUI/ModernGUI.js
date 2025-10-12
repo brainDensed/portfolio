@@ -122,15 +122,17 @@ const FileExplorer = ({ fileSystem, activeFile, onFileSelect, theme, ideTheme })
         >
           <div
             onClick={() => onFileSelect(fullPath)}
-            className={`flex items-center px-2 py-1 text-sm hover:bg-gray-700 rounded transition-colors ${
-              isActive ? 'bg-blue-600 text-white' : 'text-gray-300 hover:text-white'
-            }`}
+            className={`flex items-center px-2 py-1 text-sm hover:bg-gray-700 rounded transition-colors`}
             style={{
               backgroundColor: isActive ? ideTheme.accent : 'transparent',
-              color: isActive ? 'white' : ideTheme.text
+              color: isActive ? ideTheme.activeFile : ideTheme.text,
+              fontWeight: isActive ? 'bold' : 'normal'
             }}
           >
-            <span className="mr-2 text-gray-400">
+            <span
+              className="mr-2"
+              style={{ color: ideTheme.textSecondary }}
+            >
               {node.name.endsWith('.md') ? '📄' : '📦'}
             </span>
             <span className="truncate">{node.name}</span>
@@ -145,9 +147,13 @@ const FileExplorer = ({ fileSystem, activeFile, onFileSelect, theme, ideTheme })
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex items-center px-2 py-1 text-sm text-gray-300 hover:text-white cursor-pointer"
+            className="flex items-center px-2 py-1 text-sm cursor-pointer"
+            style={{
+              color: ideTheme.text,
+              fontWeight: 'bold'
+            }}
           >
-            <span className="mr-2">📁</span>
+            <span className="mr-2" style={{ color: ideTheme.textSecondary }}>📁</span>
             <span className="font-medium">{node.name}</span>
           </motion.div>
           <div className="ml-4">
