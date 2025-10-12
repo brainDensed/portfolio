@@ -641,8 +641,8 @@ Ready for senior roles
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^18.0.0",
-    "next": "^14.0.0",
+    "react": "^19.0.0",
+    "next": "^15.1.3",
     "framer-motion": "^10.0.0",
     "tailwindcss": "^3.0.0"
   },
