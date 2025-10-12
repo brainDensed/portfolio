@@ -590,7 +590,7 @@ Performance         █████████████████  88%
 ## 📞 Get In Touch
 
 ### 👤 Personal Details
-- **Name**: Shivam Nilay
+- **Name**: Shivam
 - **Role**: Frontend Developer | Web3 Specialist
 - **Location**: Darbhanga, Bihar, India
 
@@ -653,7 +653,7 @@ Ready for senior roles
     "nextjs",
     "frontend"
   ],
-  "author": "Shivam Nilay",
+  "author": "Shivam",
   "license": "MIT"
 }
 \`\`\`

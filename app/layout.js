@@ -12,6 +12,33 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const metadata = {
+  title: "Shivam — Terminal Portfolio",
+  description: "Interactive portfolio built like a terminal. Explore skills, projects, and real-time coding data.",
+  openGraph: {
+    title: "Shivam — Terminal Portfolio",
+    description: "A developer portfolio styled like a terminal with live data and goals.",
+    url: "https://shivamhere.fyi",
+    siteName: "Shivam Portfolio",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Shivam — Terminal Portfolio Preview",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shivam — Terminal Portfolio",
+    description: "Interactive terminal-style developer portfolio.",
+    images: ["/images/logo.png"],
+  },
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
