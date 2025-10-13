@@ -4,8 +4,16 @@
 
 /* Terminal Effects */
 @keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .terminal-cursor {
@@ -14,7 +22,7 @@
 
 /* Neon Glow */
 .neon-green {
-  text-shadow: 
+  text-shadow:
     0 0 5px #00ff00,
     0 0 10px #00ff00,
     0 0 15px #00ff00,
@@ -30,19 +38,24 @@
 
 /* Holographic Effect */
 .holographic {
-  background: linear-gradient(
-    45deg,
-    transparent,
-    rgba(0, 255, 0, 0.1),
-    transparent
-  );
+  background: linear-gradient(45deg,
+      transparent,
+      rgba(0, 255, 0, 0.1),
+      transparent);
   background-size: 200% 200%;
   animation: holographic 3s ease-in-out infinite;
 }
 
 @keyframes holographic {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* 3D Card Effects */
@@ -73,7 +86,7 @@
 
 /* Enhanced Terminal Styling */
 .terminal-window {
-  background: 
+  background:
     radial-gradient(circle at 25% 25%, var(--theme-primary, #00ff00) 0.1, transparent 50%),
     radial-gradient(circle at 75% 75%, var(--theme-primary, #00ff00) 0.05, transparent 50%),
     var(--theme-background, #000000);
@@ -143,14 +156,16 @@ section {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-input, textarea {
+input,
+textarea {
   @apply text-white bg-white/10 border border-white/20 rounded-lg px-4 py-2;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-input::placeholder, textarea::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: rgba(255, 255, 255, 0.6);
 }
 
@@ -174,13 +189,17 @@ textarea:-webkit-autofill {
 body {
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
   min-height: 100vh;
-  overflow-y: auto; /* Ensure vertical scrolling */
+  overflow-y: auto;
+  /* Ensure vertical scrolling */
   position: relative;
   scrollbar-width: none;
 }
+
 html {
-  overflow-y: auto; /* Ensure vertical scrolling */
+  overflow-y: auto;
+  /* Ensure vertical scrolling */
 }
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -209,6 +228,7 @@ html {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -236,14 +256,17 @@ html {
     --chart-5: 340 75% 55%;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
+
 .cursor-mirror {
   backdrop-filter: invert(1.2) brightness(1.5);
   -webkit-backdrop-filter: invert(1.2) brightness(1.5);
@@ -257,22 +280,26 @@ html {
   scrollbar-width: thin;
   scrollbar-color: #22c55e rgba(3, 7, 18, 0.6);
 }
+
 .scrollbar-neon::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
+
 .scrollbar-neon::-webkit-scrollbar-track {
   background: rgba(3, 7, 18, 0.6);
   border: 1px solid rgba(34, 197, 94, 0.15);
   border-radius: 9999px;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
+
 .scrollbar-neon::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #22c55e, #34d399);
   border-radius: 9999px;
   border: 2px solid rgba(3, 7, 18, 0.6);
   box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
 }
+
 .scrollbar-neon::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #34d399, #86efac);
 }
@@ -282,22 +309,26 @@ html {
   scrollbar-width: thin;
   scrollbar-color: #22c55e rgba(3, 7, 18, 0.6);
 }
+
 .terminal-window .overflow-y-auto::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
+
 .terminal-window .overflow-y-auto::-webkit-scrollbar-track {
   background: rgba(3, 7, 18, 0.6);
   border: 1px solid rgba(34, 197, 94, 0.15);
   border-radius: 9999px;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
+
 .terminal-window .overflow-y-auto::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #22c55e, #34d399);
   border-radius: 9999px;
   border: 2px solid rgba(3, 7, 18, 0.6);
   box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
 }
+
 .terminal-window .overflow-y-auto::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #34d399, #86efac);
 }
@@ -396,7 +427,7 @@ body {
 
 /* Terminal theme integration */
 .terminal-window {
-  background: 
+  background:
     radial-gradient(circle at 25% 25%, var(--theme-primary) 0.1, transparent 50%),
     radial-gradient(circle at 75% 75%, var(--theme-primary) 0.05, transparent 50%),
     var(--theme-background);
@@ -423,7 +454,7 @@ body {
 
 /* Theme-aware glow effects */
 .glow-theme {
-  text-shadow: 
+  text-shadow:
     0 0 5px var(--theme-glow),
     0 0 10px var(--theme-glow),
     0 0 15px var(--theme-glow),
@@ -450,6 +481,7 @@ body {
 
 /* Mobile-First Responsive Design */
 @layer utilities {
+
   /* Responsive Container Utilities */
   .container-mobile {
     @apply w-full px-4 sm:px-6 lg:px-8;
@@ -464,34 +496,103 @@ body {
   }
 
   /* Mobile Typography Scale */
-  .text-mobile-xs { font-size: 0.75rem; line-height: 1rem; }
-  .text-mobile-sm { font-size: 0.875rem; line-height: 1.25rem; }
-  .text-mobile-base { font-size: 1rem; line-height: 1.5rem; }
-  .text-mobile-lg { font-size: 1.125rem; line-height: 1.75rem; }
-  .text-mobile-xl { font-size: 1.25rem; line-height: 1.75rem; }
-  .text-mobile-2xl { font-size: 1.5rem; line-height: 2rem; }
-  .text-mobile-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+  .text-mobile-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  .text-mobile-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .text-mobile-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .text-mobile-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .text-mobile-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .text-mobile-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .text-mobile-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
 
   /* Mobile Spacing */
-  .space-mobile-xs > * + * { margin-top: 0.25rem; }
-  .space-mobile-sm > * + * { margin-top: 0.5rem; }
-  .space-mobile-md > * + * { margin-top: 0.75rem; }
-  .space-mobile-lg > * + * { margin-top: 1rem; }
-  .space-mobile-xl > * + * { margin-top: 1.5rem; }
+  .space-mobile-xs>*+* {
+    margin-top: 0.25rem;
+  }
+
+  .space-mobile-sm>*+* {
+    margin-top: 0.5rem;
+  }
+
+  .space-mobile-md>*+* {
+    margin-top: 0.75rem;
+  }
+
+  .space-mobile-lg>*+* {
+    margin-top: 1rem;
+  }
+
+  .space-mobile-xl>*+* {
+    margin-top: 1.5rem;
+  }
 
   /* Mobile Padding */
-  .p-mobile-xs { padding: 0.25rem; }
-  .p-mobile-sm { padding: 0.5rem; }
-  .p-mobile-md { padding: 0.75rem; }
-  .p-mobile-lg { padding: 1rem; }
-  .p-mobile-xl { padding: 1.5rem; }
+  .p-mobile-xs {
+    padding: 0.25rem;
+  }
+
+  .p-mobile-sm {
+    padding: 0.5rem;
+  }
+
+  .p-mobile-md {
+    padding: 0.75rem;
+  }
+
+  .p-mobile-lg {
+    padding: 1rem;
+  }
+
+  .p-mobile-xl {
+    padding: 1.5rem;
+  }
 
   /* Mobile Margin */
-  .m-mobile-xs { margin: 0.25rem; }
-  .m-mobile-sm { margin: 0.5rem; }
-  .m-mobile-md { margin: 0.75rem; }
-  .m-mobile-lg { margin: 1rem; }
-  .m-mobile-xl { margin: 1.5rem; }
+  .m-mobile-xs {
+    margin: 0.25rem;
+  }
+
+  .m-mobile-sm {
+    margin: 0.5rem;
+  }
+
+  .m-mobile-md {
+    margin: 0.75rem;
+  }
+
+  .m-mobile-lg {
+    margin: 1rem;
+  }
+
+  .m-mobile-xl {
+    margin: 1.5rem;
+  }
 
   /* Mobile Touch Targets */
   .touch-target {
@@ -499,10 +600,21 @@ body {
   }
 
   /* Mobile Safe Areas */
-  .safe-top { padding-top: env(safe-area-inset-top); }
-  .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
-  .safe-left { padding-left: env(safe-area-inset-left); }
-  .safe-right { padding-right: env(safe-area-inset-right); }
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
 
   /* Mobile Responsive Terminal Window */
   .terminal-mobile {
@@ -535,15 +647,15 @@ body {
   }
 
   /* Mobile-optimized spacing that scales with viewport */
-  .space-responsive-sm > * + * {
+  .space-responsive-sm>*+* {
     margin-top: clamp(0.5rem, 2vw, 1rem);
   }
 
-  .space-responsive-md > * + * {
+  .space-responsive-md>*+* {
     margin-top: clamp(0.75rem, 3vw, 1.5rem);
   }
 
-  .space-responsive-lg > * + * {
+  .space-responsive-lg>*+* {
     margin-top: clamp(1rem, 4vw, 2rem);
   }
 
@@ -611,6 +723,7 @@ body {
 
 /* Mobile Breakpoints */
 @media (max-width: 640px) {
+
   /* Mobile-specific terminal styling */
   .terminal-window {
     @apply rounded-none border-0;
@@ -641,6 +754,7 @@ body {
 }
 
 @media (max-width: 768px) {
+
   /* Tablet adjustments */
   .terminal-window {
     @apply max-w-none mx-2;
@@ -652,6 +766,7 @@ body {
 }
 
 @media (max-width: 1024px) {
+
   /* Small desktop adjustments */
   .terminal-window {
     @apply max-w-4xl;
@@ -660,6 +775,7 @@ body {
 
 /* Mobile Typography Optimization */
 @media (max-width: 768px) {
+
   /* Improve text rendering on mobile */
   body {
     -webkit-font-smoothing: antialiased;
@@ -668,12 +784,16 @@ body {
   }
 
   /* Better line heights for mobile reading */
-  p, li, div {
+  p,
+  li,
+  div {
     line-height: 1.6;
   }
 
   /* Optimize monospace fonts for mobile */
-  code, pre, .font-mono {
+  code,
+  pre,
+  .font-mono {
     font-feature-settings: "liga" 0;
     font-variant-ligatures: none;
   }
@@ -681,6 +801,7 @@ body {
 
 /* Touch-friendly interactions */
 @media (hover: none) and (pointer: coarse) {
+
   /* Remove hover effects on touch devices */
   .hover\:bg-gray-700:hover {
     background-color: transparent;
@@ -697,7 +818,9 @@ body {
 }
 
 /* High DPI display optimizations */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+
   /* Sharper borders and shadows on high DPI displays */
   .terminal-window {
     border-width: 0.5px;
@@ -710,6 +833,7 @@ body {
 
 /* Landscape mobile optimization */
 @media (max-width: 896px) and (orientation: landscape) {
+
   /* Reduce vertical padding in landscape mode */
   .terminal-window {
     height: calc(100vh - 2rem);
@@ -727,131 +851,154 @@ body {
 
 /* Touch Device Optimizations */
 @media (hover: none) and (pointer: coarse) {
-/* Remove hover states that don't work on touch */
-.hover\:scale-105:hover {
-  transform: none;
-}
 
-.hover\:bg-opacity-80:hover {
-  background-opacity: 1;
-}
+  /* Remove hover states that don't work on touch */
+  .hover\:scale-105:hover {
+    transform: none;
+  }
 
-/* Always show focus indicators for keyboard navigation */
-.focus\:ring-2:focus {
-  ring-width: 2px;
-  ring-opacity: 0.5;
-}
+  .hover\:bg-opacity-80:hover {
+    background-opacity: 1;
+  }
 
-/* Touch-friendly button states */
-.touch-button {
-  transition: all 0.15s ease;
-  -webkit-tap-highlight-color: rgba(0, 255, 0, 0.1);
-}
+  /* Always show focus indicators for keyboard navigation */
+  .focus\:ring-2:focus {
+    ring-width: 2px;
+    ring-opacity: 0.5;
+  }
 
-.touch-button:active {
-  transform: scale(0.98);
-  background-color: rgba(0, 255, 0, 0.2);
-}
+  /* Touch-friendly button states */
+  .touch-button {
+    transition: all 0.15s ease;
+    -webkit-tap-highlight-color: rgba(0, 255, 0, 0.1);
+  }
 
-/* Touch-friendly interactive elements */
-button, .cursor-pointer {
-  -webkit-tap-highlight-color: rgba(0, 255, 0, 0.1);
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
+  .touch-button:active {
+    transform: scale(0.98);
+    background-color: rgba(0, 255, 0, 0.2);
+  }
 
-/* Improve tap targets */
-button, a, [role="button"] {
-  min-height: 44px;
-  min-width: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  /* Touch-friendly interactive elements */
+  button,
+  .cursor-pointer {
+    -webkit-tap-highlight-color: rgba(0, 255, 0, 0.1);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
 
-/* Better text selection on touch */
-.select-text {
-  -webkit-user-select: text;
-  user-select: text;
-}
+  /* Improve tap targets */
+  button,
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-/* Touch scroll momentum */
-.overflow-auto, .overflow-y-auto {
-  -webkit-overflow-scrolling: touch;
-}
+  /* Better text selection on touch */
+  .select-text {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* Touch scroll momentum */
+  .overflow-auto,
+  .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 /* Improved focus management for accessibility */
 @media (max-width: 768px) {
-/* Visible focus indicators on mobile */
-:focus-visible {
-  outline: 2px solid #00ff00;
-  outline-offset: 2px;
-  border-radius: 4px;
+
+  /* Visible focus indicators on mobile */
+  :focus-visible {
+    outline: 2px solid #00ff00;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Better focus for input elements */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: 2px solid #00ff00;
+    outline-offset: 1px;
+    box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.1);
+  }
+
+  /* Remove focus outline for mouse users but keep for keyboard */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
-/* Better focus for input elements */
-input:focus, textarea:focus, select:focus {
-  outline: 2px solid #00ff00;
-  outline-offset: 1px;
-  box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.1);
-}
-
-/* Remove focus outline for mouse users but keep for keyboard */
-:focus:not(:focus-visible) {
-  outline: none;
-}
+/* Accessibility utilities */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Touch gesture improvements */
 @media (max-width: 768px) {
-/* Smoother scrolling */
-* {
-  scroll-behavior: smooth;
-}
 
-/* Prevent zoom on double tap for certain elements */
-.no-zoom {
-  touch-action: manipulation;
-}
+  /* Smoother scrolling */
+  * {
+    scroll-behavior: smooth;
+  }
 
-/* Better momentum scrolling */
-.terminal-window .overflow-y-auto {
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: y proximity;
-}
+  /* Prevent zoom on double tap for certain elements */
+  .no-zoom {
+    touch-action: manipulation;
+  }
+
+  /* Better momentum scrolling */
+  .terminal-window .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: y proximity;
+  }
 }
 
 /* Mobile interaction feedback */
 @media (hover: none) {
-/* Active states for touch feedback */
-.touch-feedback:active {
-  background-color: rgba(0, 255, 0, 0.1);
-  transform: scale(0.98);
-}
 
-/* Ripple effect for buttons */
-.ripple-button {
-  position: relative;
-  overflow: hidden;
-}
+  /* Active states for touch feedback */
+  .touch-feedback:active {
+    background-color: rgba(0, 255, 0, 0.1);
+    transform: scale(0.98);
+  }
 
-.ripple-button::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(0, 255, 0, 0.3);
-  transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s;
-}
+  /* Ripple effect for buttons */
+  .ripple-button {
+    position: relative;
+    overflow: hidden;
+  }
 
-.ripple-button:active::after {
-  width: 300px;
-  height: 300px;
-}
+  .ripple-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(0, 255, 0, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+
+  .ripple-button:active::after {
+    width: 300px;
+    height: 300px;
+  }
 }

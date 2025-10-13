@@ -363,6 +363,8 @@ Total Commits (Today): ${liveData.totalCommits || 'Loading commits...'}
                                     autoComplete="off"
                                     spellCheck="false"
                                     style={{ fontSize: 'inherit' }}
+                                    aria-label="Terminal command input"
+                                    aria-describedby="terminal-help"
                                 />
                                 <motion.span
                                     animate={{ opacity: [1, 0] }}
@@ -371,6 +373,11 @@ Total Commits (Today): ${liveData.totalCommits || 'Loading commits...'}
                                 >
                                     █
                                 </motion.span>
+                            </div>
+                            
+                            {/* Hidden description for screen readers */}
+                            <div id="terminal-help" className="sr-only">
+                                Enter terminal commands to interact with Shivam's portfolio. Type 'help' for available commands.
                             </div>
                         </div>
 
