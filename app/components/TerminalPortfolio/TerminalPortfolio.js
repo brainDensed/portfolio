@@ -9,6 +9,24 @@ const MatrixRain = lazy(() => import("../MatrixRain/MatrixRain"));
 const SkillTree = lazy(() => import("../SkillTree/SkillTree"));
 const HolographicCard = lazy(() => import("../HolographicCard/HolographicCard"));
 
+// ASCII Art Component for lazy loading
+const ASCIIArt = () => (
+    <pre className="text-theme-secondary text-xs sm:text-sm whitespace-pre-wrap overflow-x-auto ascii-art">
+        {`
+ ██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗
+ ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗
+ ██████╔╝██║   ██║██████╔╝   ██║   █████╗  ██║   ██║██║     ██║██║   ██║
+ ██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝  ██║   ██║██║     ██║██║   ██║
+ ██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝
+ ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝
+
+       Frontend + Web3 Specialist
+             Welcome to Shivam's Interactive Terminal
+                  Type 'help' to get started
+`}
+    </pre>
+);
+
 const TerminalPortfolio = () => {
     const [input, setInput] = useState("");
     const [history, setHistory] = useState([]);
@@ -30,6 +48,7 @@ const TerminalPortfolio = () => {
         totalCommits: null
     });
     const [isLoadingData, setIsLoadingData] = useState(true);
+    const [showASCII, setShowASCII] = useState(false);
 
     // Create commands using the command factory
     const commands = createCommands(
@@ -168,6 +187,14 @@ const TerminalPortfolio = () => {
         return () => clearTimeout(timer);
     }, []);
 
+    // Delay ASCII art loading for better LCP
+    useEffect(() => {
+        const asciiTimer = setTimeout(() => {
+            setShowASCII(true);
+        }, 500); // Load ASCII art after 500ms
+        return () => clearTimeout(asciiTimer);
+    }, []);
+
     // Konami Code Easter Egg
     useEffect(() => {
         const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
@@ -244,7 +271,7 @@ const TerminalPortfolio = () => {
                     {/* Terminal Window */}
                     <div className="terminal-window border border-theme rounded-xl shadow-2xl overflow-hidden w-full max-w-5xl mx-auto h-[calc(100vh-3rem)] flex flex-col sm:rounded-xl sm:border sm:shadow-2xl">
                         {/* Terminal Header with gamified UI */}
-                        <div className="bg-theme-surface px-2 sm:px-4 py-2 sm:py-3 flex items-center justify-between border-b border-theme">
+                        <div className="bg-theme-surface px-2 sm:px-4 py-2 sm:py-3 flex items-center justify-between border-b border-theme terminal-header">
                             <div className="flex items-center gap-1 sm:gap-2">
                                 <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
                                 <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
@@ -270,7 +297,7 @@ const TerminalPortfolio = () => {
                         {/* Terminal Body is the only scrollable area */}
                         <div
                             ref={terminalRef}
-                            className="flex-1 overflow-y-auto p-2 sm:p-4 pb-16 sm:pb-20 bg-theme-background select-text"
+                            className="flex-1 overflow-y-auto p-2 sm:p-4 pb-16 sm:pb-20 bg-theme-background select-text terminal-body"
                             onClick={(e) => {
                                 // Only focus input if clicking on empty space, not on selectable text
                                 if (e.target === e.currentTarget) {
@@ -278,36 +305,46 @@ const TerminalPortfolio = () => {
                                 }
                             }}
                         >
-                            {/* Welcome Message */}
+                            {/* Welcome Message - Optimized for LCP */}
                             <div className="mb-2 sm:mb-4">
-                                <pre className="text-theme-secondary text-xs sm:text-sm whitespace-pre-wrap overflow-x-auto">
-                                    {`
- ██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗
- ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝██╔═══██╗██║     ██║██╔═══██╗
- ██████╔╝██║   ██║██████╔╝   ██║   █████╗  ██║   ██║██║     ██║██║   ██║
- ██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝  ██║   ██║██║     ██║██║   ██║
- ██║     ╚██████╔╝██║  ██║   ██║   ██║     ╚██████╔╝███████╗██║╚██████╔╝
- ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝
+                                {/* Mobile-first simple header */}
+                                <div className="block sm:hidden text-center mb-4 mobile-header">
+                                    <div className="text-theme-primary text-lg font-bold mb-1">PORTFOLIO</div>
+                                    <div className="text-theme-secondary text-sm">Frontend + Web3 Specialist</div>
+                                    <div className="text-theme-accent text-xs mt-1">Welcome to Shivam's Interactive Terminal</div>
+                                    <div className="text-theme-secondary text-xs mt-1">Type 'help' to get started</div>
+                                </div>
 
-       Frontend + Web3 Specialist
-             Welcome to Shivam's Interactive Terminal
-                  Type 'help' to get started
+                                {/* Desktop ASCII art - lazy loaded */}
+                                <div className="hidden sm:block">
+                                    {showASCII ? (
+                                        <ASCIIArt />
+                                    ) : (
+                                        <div className="text-center py-8">
+                                            <div className="text-theme-primary text-xl font-bold mb-2">PORTFOLIO</div>
+                                            <div className="text-theme-secondary text-sm">Frontend + Web3 Specialist</div>
+                                            <div className="text-theme-accent text-xs mt-2">Welcome to Shivam's Interactive Terminal</div>
+                                            <div className="text-theme-secondary text-xs mt-1">Type 'help' to get started</div>
+                                        </div>
+                                    )}
+                                </div>
 
-Initializing Shivam System...
-Fetching live data...
--------------------------------------
-Username: @${liveData.github?.login || (liveData.github?.error ? 'Service unavailable' : 'brainDensed')}
-GitHub Repos: ${liveData.github?.public_repos ?? (liveData.github?.error ? 'Data unavailable' : '...')} | Followers: ${liveData.github?.followers ?? (liveData.github?.error ? 'Data unavailable' : '...')}
-ETH: ₹${liveData.ethPrice ? liveData.ethPrice.toLocaleString('en-IN') : '...'} | Weather: ${liveData.location?.city && liveData.weather && !liveData.weather.error ? `${liveData.location.city} ${liveData.weather.weatherDesc?.[0]?.value || '☀️'} ${liveData.weather.temp_C}°C` : (liveData.weather?.error ? 'Weather unavailable' : '...')}
-IP: ${liveData.location?.ip || (liveData.location?.error ? 'Detection failed' : '...')} | Location: ${liveData.location?.city && liveData.location?.country_name && !liveData.location.error ? `${liveData.location.city}, ${liveData.location.country_name}` : (liveData.location?.error ? 'Location unavailable' : '...')}
-Total Commits (Today): ${liveData.totalCommits || '...'}
--------------------------------------
-`}
-                                </pre>
+                                {/* System info - always visible */}
+                                <div className="text-theme-secondary text-xs sm:text-sm mt-4 system-info">
+                                    <div>Initializing Shivam System...</div>
+                                    <div>Fetching live data...</div>
+                                    <div className="border-t border-theme-secondary/30 my-2"></div>
+                                    <div>Username: @{liveData.github?.login || (liveData.github?.error ? 'Service unavailable' : 'brainDensed')}</div>
+                                    <div>GitHub Repos: {liveData.github?.public_repos ?? (liveData.github?.error ? 'Data unavailable' : '...')} | Followers: {liveData.github?.followers ?? (liveData.github?.error ? 'Data unavailable' : '...')}</div>
+                                    <div>ETH: ₹{liveData.ethPrice ? liveData.ethPrice.toLocaleString('en-IN') : '...'} | Weather: {liveData.location?.city && liveData.weather && !liveData.weather.error ? `${liveData.location.city} ${liveData.weather.weatherDesc?.[0]?.value || '☀️'} ${liveData.weather.temp_C}°C` : (liveData.weather?.error ? 'Weather unavailable' : '...')}</div>
+                                    <div>IP: {liveData.location?.ip || (liveData.location?.error ? 'Detection failed' : '...')} | Location: {liveData.location?.city && liveData.location?.country_name && !liveData.location.error ? `${liveData.location.city}, ${liveData.location.country_name}` : (liveData.location?.error ? 'Location unavailable' : '...')}</div>
+                                    <div>Total Commits (Today): {liveData.totalCommits || '...'}</div>
+                                    <div className="border-t border-theme-secondary/30 my-2"></div>
+                                </div>
                             </div>
 
                             {/* Command History */}
-                            <div>
+                            <div className="command-history">
                                 {history.map((entry, index) => (
                                     <div key={index} className="mb-1 sm:mb-2">
                                         <div className="flex items-center">

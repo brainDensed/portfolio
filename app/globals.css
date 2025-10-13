@@ -24,6 +24,54 @@
   transform: translateZ(0);
 }
 
+/* Critical above-the-fold optimization */
+.terminal-header {
+  content-visibility: visible;
+  contain: layout style;
+}
+
+.terminal-body {
+  content-visibility: auto;
+  contain-intrinsic-size: 600px;
+}
+
+/* ASCII art optimizations */
+.ascii-art {
+  contain: layout style paint;
+  font-display: block;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  content-visibility: auto;
+  contain-intrinsic-size: 300px;
+}
+
+/* Mobile-first content prioritization */
+@media (max-width: 640px) {
+  .ascii-art {
+    display: none !important;
+  }
+  
+  /* Ensure mobile header is the LCP element */
+  .mobile-header {
+    contain: layout style paint;
+    will-change: auto;
+    content-visibility: visible;
+  }
+}
+
+/* Optimize system info section */
+.system-info {
+  content-visibility: auto;
+  contain-intrinsic-size: 200px;
+}
+
+/* Command history optimization */
+.command-history {
+  content-visibility: auto;
+  contain-intrinsic-size: 100px;
+}
+
 /* Neon Glow */
 .neon-green {
   text-shadow:
