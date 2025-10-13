@@ -1,126 +1,66 @@
-# 🚀 Terminal Portfolio - Next-Gen Developer Experience
+# Shivam's Interactive Terminal Portfolio
 
-Welcome to my **revolutionary terminal-based portfolio**! This isn't just another portfolio website - it's an interactive command-line experience that showcases cutting-edge web development skills and innovative UI/UX design.
+<div align="center">
+ <p><strong>🚀 Experience the future of portfolio websites</strong></p>
+ <p>An immersive command-line interface showcasing modern web development</p>
+</div>
 
-## 🎯 Vision: To be counted among some top developers
+## ✨ Key Features
 
-This portfolio is designed to demonstrate the level of innovation and technical expertise required for top-tier developer positions. Every feature is crafted to showcase skills that put me in the **top 1% of developers**.
+🖥️ **Interactive Terminal** • 🎮 **Skill Tree RPG** • 🌊 **Matrix Rain** • 💳 **3D Holographic Card**
+⌨️ **Live Commands** • 🎨 **Cyberpunk Aesthetics** • 📱 **Responsive Design**
 
-## ✨ Revolutionary Features
+### 🎯 Quick Commands
 
-### 🖥️ **Interactive Terminal Interface**
-- Full-featured command-line portfolio experience
-- Real-time command execution with autocomplete
-- Authentic terminal aesthetics with modern web technologies
-
-### 🎮 **Gamified Elements**
-- RPG-style skill tree visualization
-- Achievement system and progress tracking
-- Interactive 3D holographic business card
-- Easter eggs and hidden commands
-
-### 🌟 **Cutting-Edge Visuals**
-- Matrix-style code rain animation
-- Holographic effects and neon glows
-- 3D card flip animations
-- Scanline effects and terminal authenticity
-
-### 🎪 **Interactive Commands**
 ```bash
-help          # Discover all available commands
-about         # Learn about my background
-skills        # View technical expertise
-projects      # Browse portfolio projects
-experience    # Career timeline
-contact       # Get in touch
-resume        # Download resume
-matrix        # Enter the Matrix
-hack          # Try to hack the system
-card          # Generate 3D business card
-easter        # Hidden surprises
+help       # Discover all commands
+about      # Learn my story
+skills     # Technical expertise
+projects   # Portfolio showcase
+contact    # Get in touch
+resume     # Download CV
+matrix     # Toggle Matrix mode
 ```
 
-## 🛠️ Technical Architecture
-
-### **Core Technologies**
-- **Framework:** Next.js 15+ (Latest features)
-- **Animations:** Framer Motion (Advanced 3D effects)
-- **Styling:** Tailwind CSS + Custom CSS (Terminal effects)
-- **TypeScript:** Full type safety
-- **Performance:** Optimized for 100% Lighthouse scores
-
-### **Core Components**
-- `TerminalPortfolio` - Main interactive terminal interface
-- `MatrixRain` - Animated Matrix-style code rain effect
-- `SkillTree` - RPG-style skill visualization
-- `HolographicCard` - 3D flippable business card
-
-## 🎨 Design Philosophy
-
-### **Cyberpunk Aesthetic**
-- Terminal green color scheme
-- Neon glows and holographic effects
-- Retro-futuristic typography
-- Interactive command-line interface
-
-### **User Experience**
-- Intuitive command discovery
-- Progressive disclosure of features
-- Keyboard shortcuts and Easter eggs
-- Responsive design for all devices
-
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 ```bash
-# Clone the repository
+# Clone & run
 git clone https://github.com/brainDensed/portfolio
+cd portfolio && npm install && npm run dev
 
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
+# Visit http://localhost:3000
 ```
 
-## 🎯 Unique Selling Points
+## 🌐 Live Experience
 
-1. **Innovation:** First-of-its-kind terminal portfolio
-2. **Interactivity:** Fully functional command-line interface
-3. **Gamification:** RPG elements and achievement system
-4. **3D Effects:** Advanced animations and holographic elements
-5. **Performance:** Optimized for speed and accessibility
-6. **Scalability:** Built with enterprise-grade architecture
+**[🚀 Launch Terminal Portfolio](https://shivamhere.fyi)**
 
-## 🏆 Why This Approach?
+<div align="center">
+ <sub>💻 Try commands like <code>help</code>, <code>matrix</code>, or <code>card</code></sub>
+</div>
 
-- **Demonstrates Technical Prowess:** Shows mastery of advanced web technologies
-- **Memorable Experience:** Stands out from traditional portfolios
-- **Interactive Engagement:** Keeps visitors engaged longer
-- **Showcases Creativity:** Proves ability to think outside the box
-- **Professional Impact:** Appeals to technical decision-makers
+## 🔗 Connect
 
-## 🌐 Live Demo
+<div align="center">
+ <a href="https://linkedin.com/in/shivam-nilay" target="_blank">
+   <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+ </a>
+ <a href="https://github.com/brainDensed" target="_blank">
+   <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+ </a>
+ <a href="https://shivamhere.fyi" target="_blank">
+   <img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=About.me&logoColor=white" alt="Portfolio">
+ </a>
+</div>
 
-**[Check it out](https://shivamhere.fyi)**
+## 🛠️ Tech Stack
 
-## 📞 Contact
-
-Ready to discuss opportunities? Use the terminal commands or reach out directly:
-
-- **LinkedIn:** /in/shivam-nilay
-- **GitHub:** /brainDensed
-- **Location:** Darbhanga, Bihar, India
-
-## 🏆 Notable Achievements
-
-- **Award Winner** (Hackathon)
-- **2+ Years** Professional Frontend Development Experience
-- **Expert** in React, Next.js, and Web3 Technologies
-- **Strong Foundation** in Competitive Programming & DSA
+**Built with:** Next.js 15 • React 19 • Framer Motion • Tailwind CSS
+**Features:** TypeScript • Responsive • Optimized Performance
 
 ---
 
-*Built with ❤️ and lots of ☕ by Shivam, targeting the top 1% of Web3 developer opportunities*
+<div align="center">
+ <p><strong>👋 Ready to collaborate? Let's build something amazing!</strong></p>
+</div>
