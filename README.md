@@ -59,8 +59,26 @@ cd portfolio && npm install && npm run dev
 **Built with:** Next.js 15 • React 19 • Framer Motion • Tailwind CSS
 **Features:** TypeScript • Responsive • Optimized Performance
 
+## 📋 License & Usage
+
+<div align="center">
+
+**© 2024 Shivam Nilay. All Rights Reserved.**
+
+This project is proprietary software. All code, design, and content are protected by copyright law.
+
+**⚠️ Restrictions:**
+- No unauthorized copying, modification, or distribution
+- No commercial use without explicit permission
+- No reverse engineering or derivative works
+- Personal viewing and inspiration only
+
+For licensing inquiries or collaboration opportunities, please contact via the links above.
+
+</div>
+
 ---
 
 <div align="center">
- <p><strong>👋 Ready to collaborate? Let's build something amazing!</strong></p>
+  <p><strong>👋 Ready to collaborate? Let's build something amazing!</strong></p>
 </div>
