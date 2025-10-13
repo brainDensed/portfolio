@@ -310,7 +310,6 @@ GitHub Repos: ${liveData.github?.public_repos ? liveData.github.public_repos : (
 ETH: ₹${liveData.ethPrice ? liveData.ethPrice.toLocaleString('en-IN') : 'Price unavailable'} | Weather: ${liveData.location?.city && liveData.weather && !liveData.weather.error ? `${liveData.location.city} ${liveData.weather.weatherDesc?.[0]?.value || '☀️'} ${liveData.weather.temp_C}°C` : (liveData.weather?.error ? 'Weather unavailable' : 'Loading weather...')}
 IP: ${liveData.location?.ip || (liveData.location?.error ? 'Detection failed' : 'Detecting location...')} | Location: ${liveData.location?.city && liveData.location?.country_name && !liveData.location.error ? `${liveData.location.city}, ${liveData.location.country_name}` : (liveData.location?.error ? 'Location unavailable' : 'Loading location...')}
 Total Commits (Today): ${liveData.totalCommits || 'Loading commits...'}
-Target Package: ₹15+ LPA
 -------------------------------------
 `}
 `}

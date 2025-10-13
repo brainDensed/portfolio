@@ -629,7 +629,6 @@ Performance         █████████████████  88%
 - **Availability**: Open to opportunities
 
 ### 💰 Package Expectations
-- **Target Package**: ₹15 LPA+
 - **Experience Level**: Mid to Senior Developer
 - **Notice Period**: Immediate to 30 days
 
