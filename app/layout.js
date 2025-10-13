@@ -60,6 +60,14 @@ export default function RootLayout({ children }) {
       <head>
         <title>Shivam - Web3 Developer Portfolio</title>
         <meta name="description" content="Frontend + Web3 Specialist" />
+        <link rel="preconnect" href="https://api.github.com" />
+        <link rel="preconnect" href="https://api.coingecko.com" />
+        <link rel="preconnect" href="https://ipapi.co" />
+        <link rel="preconnect" href="https://wttr.in" />
+        <link rel="dns-prefetch" href="https://api.github.com" />
+        <link rel="dns-prefetch" href="https://api.coingecko.com" />
+        <link rel="dns-prefetch" href="https://ipapi.co" />
+        <link rel="dns-prefetch" href="https://wttr.in" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

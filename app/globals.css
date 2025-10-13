@@ -4,20 +4,24 @@
 
 /* Terminal Effects */
 @keyframes blink {
-
-  0%,
-  50% {
-    opacity: 1;
-  }
-
-  51%,
-  100% {
-    opacity: 0;
-  }
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
 .terminal-cursor {
   animation: blink 1s infinite;
+  will-change: opacity;
+}
+
+/* Performance optimizations */
+.terminal-window {
+  contain: layout style paint;
+  will-change: scroll-position;
+}
+
+.terminal-window .overflow-y-auto {
+  contain: layout style paint;
+  transform: translateZ(0);
 }
 
 /* Neon Glow */
@@ -190,9 +194,11 @@ body {
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
   min-height: 100vh;
   overflow-y: auto;
-  /* Ensure vertical scrolling */
   position: relative;
   scrollbar-width: none;
+  /* Performance optimizations */
+  contain: layout style;
+  will-change: scroll-position;
 }
 
 html {

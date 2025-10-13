@@ -1,19 +1,20 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import MatrixRain from "../MatrixRain/MatrixRain";
-import SkillTree from "../SkillTree/SkillTree";
-import HolographicCard from "../HolographicCard/HolographicCard";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useTheme } from "../../contexts/ThemeContext";
 import { createCommands } from "./commands/index.js";
+
+// Lazy load heavy components
+const MatrixRain = lazy(() => import("../MatrixRain/MatrixRain"));
+const SkillTree = lazy(() => import("../SkillTree/SkillTree"));
+const HolographicCard = lazy(() => import("../HolographicCard/HolographicCard"));
 
 const TerminalPortfolio = () => {
     const [input, setInput] = useState("");
     const [history, setHistory] = useState([]);
     const [commandHistory, setCommandHistory] = useState([]);
     const [historyIndex, setHistoryIndex] = useState(-1);
-    const [currentPath, setCurrentPath] = useState("~");
+    const [currentPath] = useState("~");
     const [showMatrix, setShowMatrix] = useState(false);
     const [showSkillTree, setShowSkillTree] = useState(false);
     const [showCard, setShowCard] = useState(false);
@@ -62,7 +63,7 @@ const TerminalPortfolio = () => {
         return () => clearInterval(timer);
     }, []);
 
-    // Fetch live data
+    // Fetch live data with performance optimization
     useEffect(() => {
         const fetchLiveData = async () => {
             const newLiveData = {
@@ -73,87 +74,77 @@ const TerminalPortfolio = () => {
                 totalCommits: null
             };
 
+            // Use Promise.allSettled for parallel requests with timeout
+            const timeout = (ms) => new Promise((_, reject) =>
+                setTimeout(() => reject(new Error('Request timeout')), ms)
+            );
+
+            const fetchWithTimeout = (url, timeoutMs = 5000) =>
+                Promise.race([fetch(url), timeout(timeoutMs)]);
+
             try {
-                // GitHub user data
-                try {
-                    const githubRes = await fetch('https://api.github.com/users/brainDensed');
-                    if (githubRes.ok) {
-                        newLiveData.github = await githubRes.json();
-                    } else {
-                        console.warn('GitHub API error:', githubRes.status);
-                        newLiveData.github = { error: 'GitHub data unavailable' };
-                    }
-                } catch (error) {
-                    console.warn('GitHub fetch error:', error);
-                    newLiveData.github = { error: 'Unable to fetch GitHub data' };
+                const results = await Promise.allSettled([
+                    // GitHub user data
+                    fetchWithTimeout('https://api.github.com/users/brainDensed', 3000)
+                        .then(res => res.ok ? res.json() : Promise.reject('GitHub API error')),
+
+                    // ETH price in INR
+                    fetchWithTimeout('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=inr', 3000)
+                        .then(res => res.ok ? res.json() : Promise.reject('CoinGecko API error')),
+
+                    // IP and location
+                    fetchWithTimeout('https://ipapi.co/json/', 3000)
+                        .then(res => res.ok ? res.json() : Promise.reject('Location API error'))
+                ]);
+
+                // Process GitHub data
+                if (results[0].status === 'fulfilled') {
+                    newLiveData.github = results[0].value;
+                } else {
+                    newLiveData.github = { error: 'GitHub data unavailable' };
                 }
 
-                // ETH price in INR
-                try {
-                    const ethRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=inr');
-                    if (ethRes.ok) {
-                        const ethData = await ethRes.json();
-                        newLiveData.ethPrice = ethData.ethereum?.inr || null;
-                    } else {
-                        console.warn('CoinGecko API error:', ethRes.status);
-                        newLiveData.ethPrice = null;
-                    }
-                } catch (error) {
-                    console.warn('CoinGecko fetch error:', error);
+                // Process ETH price
+                if (results[1].status === 'fulfilled') {
+                    newLiveData.ethPrice = results[1].value.ethereum?.inr || null;
+                } else {
                     newLiveData.ethPrice = null;
                 }
 
-                // IP and location
-                try {
-                    const locationRes = await fetch('https://ipapi.co/json/');
-                    if (locationRes.ok) {
-                        newLiveData.location = await locationRes.json();
-                    } else {
-                        console.warn('Location API error:', locationRes.status);
-                        newLiveData.location = { error: 'Location data unavailable' };
-                    }
-                } catch (error) {
-                    console.warn('Location fetch error:', error);
-                    newLiveData.location = { error: 'Unable to detect location' };
-                }
+                // Process location data
+                if (results[2].status === 'fulfilled') {
+                    newLiveData.location = results[2].value;
 
-                // Weather data (only if location is available)
-                if (newLiveData.location && !newLiveData.location.error) {
+                    // Fetch weather only if location is available
                     try {
-                        const weatherRes = await fetch(`https://wttr.in/${newLiveData.location.city}?format=j1`);
+                        const weatherRes = await fetchWithTimeout(`https://wttr.in/${newLiveData.location.city}?format=j1`, 3000);
                         if (weatherRes.ok) {
                             const weatherData = await weatherRes.json();
-                            newLiveData.weather = weatherData.current_condition ? weatherData.current_condition[0] : null;
-                        } else {
-                            console.warn('Weather API error:', weatherRes.status);
-                            newLiveData.weather = { error: 'Weather data unavailable' };
+                            newLiveData.weather = weatherData.current_condition?.[0] || null;
                         }
-                    } catch (error) {
-                        console.warn('Weather fetch error:', error);
-                        newLiveData.weather = { error: 'Unable to fetch weather' };
+                    } catch {
+                        newLiveData.weather = { error: 'Weather data unavailable' };
                     }
+                } else {
+                    newLiveData.location = { error: 'Location data unavailable' };
+                    newLiveData.weather = { error: 'Weather unavailable' };
                 }
 
-                // Coding time from GitHub events
+                // Fetch GitHub events for commits (separate request)
                 try {
-                    const eventsRes = await fetch('https://api.github.com/users/brainDensed/events');
+                    const eventsRes = await fetchWithTimeout('https://api.github.com/users/brainDensed/events', 3000);
                     if (eventsRes.ok) {
                         const events = await eventsRes.json();
-
-                        // Calculate today's coding time
                         const today = new Date().toISOString().split('T')[0];
                         const todayEvents = events.filter(event =>
-                            event.type === 'PushEvent' &&
-                            event.created_at.startsWith(today)
+                            event.type === 'PushEvent' && event.created_at.startsWith(today)
                         );
                         const totalCommits = todayEvents.reduce((sum, event) => sum + event.payload.commits.length, 0);
                         newLiveData.totalCommits = totalCommits > 0 ? `(${totalCommits} commits)` : '(No commits today)';
                     } else {
-                        console.warn('GitHub events API error:', eventsRes.status);
                         newLiveData.totalCommits = '(Unable to fetch commits)';
                     }
-                } catch (error) {
-                    console.warn('GitHub events fetch error:', error);
+                } catch {
                     newLiveData.totalCommits = '(Unable to fetch commits)';
                 }
 
@@ -172,7 +163,9 @@ const TerminalPortfolio = () => {
             }
         };
 
-        fetchLiveData();
+        // Delay data fetching to improve initial page load
+        const timer = setTimeout(fetchLiveData, 100);
+        return () => clearTimeout(timer);
     }, []);
 
     // Konami Code Easter Egg
@@ -208,8 +201,10 @@ const TerminalPortfolio = () => {
 
     return (
         <>
-            <MatrixRain isActive={showMatrix} onClose={() => setShowMatrix(false)} />
-            <HolographicCard isVisible={showCard} onClose={() => setShowCard(false)} />
+            <Suspense fallback={null}>
+                <MatrixRain isActive={showMatrix} onClose={() => setShowMatrix(false)} />
+                <HolographicCard isVisible={showCard} onClose={() => setShowCard(false)} />
+            </Suspense>
             {showSkillTree && (
                 <div
                     className="fixed inset-0 z-40 bg-black/95 cursor-pointer"
@@ -230,13 +225,15 @@ const TerminalPortfolio = () => {
                         }}
                     >
                         {/* Return instruction */}
-                        <SkillTree
-                            isGUI={false}
-                            onClose={() => {
-                                setShowSkillTree(false);
-                                window.dispatchEvent(new CustomEvent('skillTreeToggle', { detail: { active: false } }));
-                            }}
-                        />
+                        <Suspense fallback={<div className="flex items-center justify-center h-full text-theme-primary">Loading...</div>}>
+                            <SkillTree
+                                isGUI={false}
+                                onClose={() => {
+                                    setShowSkillTree(false);
+                                    window.dispatchEvent(new CustomEvent('skillTreeToggle', { detail: { active: false } }));
+                                }}
+                            />
+                        </Suspense>
                     </div>
                 </div>
             )}
@@ -282,12 +279,7 @@ const TerminalPortfolio = () => {
                             }}
                         >
                             {/* Welcome Message */}
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ duration: 1 }}
-                                className="mb-2 sm:mb-4"
-                            >
+                            <div className="mb-2 sm:mb-4">
                                 <pre className="text-theme-secondary text-xs sm:text-sm whitespace-pre-wrap overflow-x-auto">
                                     {`
  ██████╗  ██████╗ ██████╗ ████████╗███████╗ ██████╗ ██╗     ██╗ ██████╗
@@ -301,30 +293,23 @@ const TerminalPortfolio = () => {
              Welcome to Shivam's Interactive Terminal
                   Type 'help' to get started
 
-${isLoadingData ? 'Loading live data...' : `
 Initializing Shivam System...
 Fetching live data...
 -------------------------------------
-Username: @${liveData.github?.login || (liveData.github?.error ? 'Service unavailable' : 'Loading GitHub info...')}
-GitHub Repos: ${liveData.github?.public_repos ? liveData.github.public_repos : (liveData.github?.error ? 'Data unavailable' : 'Loading...')} | Followers: ${liveData.github?.followers ? liveData.github.followers : (liveData.github?.error ? 'Data unavailable' : 'Loading...')}
-ETH: ₹${liveData.ethPrice ? liveData.ethPrice.toLocaleString('en-IN') : 'Price unavailable'} | Weather: ${liveData.location?.city && liveData.weather && !liveData.weather.error ? `${liveData.location.city} ${liveData.weather.weatherDesc?.[0]?.value || '☀️'} ${liveData.weather.temp_C}°C` : (liveData.weather?.error ? 'Weather unavailable' : 'Loading weather...')}
-IP: ${liveData.location?.ip || (liveData.location?.error ? 'Detection failed' : 'Detecting location...')} | Location: ${liveData.location?.city && liveData.location?.country_name && !liveData.location.error ? `${liveData.location.city}, ${liveData.location.country_name}` : (liveData.location?.error ? 'Location unavailable' : 'Loading location...')}
-Total Commits (Today): ${liveData.totalCommits || 'Loading commits...'}
+Username: @${liveData.github?.login || (liveData.github?.error ? 'Service unavailable' : 'brainDensed')}
+GitHub Repos: ${liveData.github?.public_repos ?? (liveData.github?.error ? 'Data unavailable' : '...')} | Followers: ${liveData.github?.followers ?? (liveData.github?.error ? 'Data unavailable' : '...')}
+ETH: ₹${liveData.ethPrice ? liveData.ethPrice.toLocaleString('en-IN') : '...'} | Weather: ${liveData.location?.city && liveData.weather && !liveData.weather.error ? `${liveData.location.city} ${liveData.weather.weatherDesc?.[0]?.value || '☀️'} ${liveData.weather.temp_C}°C` : (liveData.weather?.error ? 'Weather unavailable' : '...')}
+IP: ${liveData.location?.ip || (liveData.location?.error ? 'Detection failed' : '...')} | Location: ${liveData.location?.city && liveData.location?.country_name && !liveData.location.error ? `${liveData.location.city}, ${liveData.location.country_name}` : (liveData.location?.error ? 'Location unavailable' : '...')}
+Total Commits (Today): ${liveData.totalCommits || '...'}
 -------------------------------------
 `}
-`}
                                 </pre>
-                            </motion.div>
+                            </div>
 
                             {/* Command History */}
-                            <AnimatePresence>
+                            <div>
                                 {history.map((entry, index) => (
-                                    <motion.div
-                                        key={index}
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        className="mb-1 sm:mb-2"
-                                    >
+                                    <div key={index} className="mb-1 sm:mb-2">
                                         <div className="flex items-center">
                                             <span className="text-theme-accent">shivam@portfolio</span>
                                             <span className="text-theme-secondary">:</span>
@@ -342,9 +327,9 @@ Total Commits (Today): ${liveData.totalCommits || 'Loading commits...'}
                                                 }
                                             </div>
                                         )}
-                                    </motion.div>
+                                    </div>
                                 ))}
-                            </AnimatePresence>
+                            </div>
 
                             {/* Current Input Line */}
                             <div className="flex items-center text-sm sm:text-base">
@@ -366,15 +351,11 @@ Total Commits (Today): ${liveData.totalCommits || 'Loading commits...'}
                                     aria-label="Terminal command input"
                                     aria-describedby="terminal-help"
                                 />
-                                <motion.span
-                                    animate={{ opacity: [1, 0] }}
-                                    transition={{ duration: 1, repeat: Infinity }}
-                                    className="text-theme-primary ml-1"
-                                >
+                                <span className="text-theme-primary ml-1 terminal-cursor">
                                     █
-                                </motion.span>
+                                </span>
                             </div>
-                            
+
                             {/* Hidden description for screen readers */}
                             <div id="terminal-help" className="sr-only">
                                 Enter terminal commands to interact with Shivam's portfolio. Type 'help' for available commands.
