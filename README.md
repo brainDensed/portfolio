@@ -36,7 +36,6 @@ contact       # Get in touch
 resume        # Download resume
 matrix        # Enter the Matrix
 hack          # Try to hack the system
-skilltree     # RPG-style skill visualization
 card          # Generate 3D business card
 easter        # Hidden surprises
 ```
