@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Shivam Nilay - Elite Web3 Developer | Interactive Terminal Portfolio",
-  description: "🚀 Revolutionary terminal-style portfolio by award-winning Web3 developer. Interactive command-line experience showcasing React, Next.js, blockchain expertise. Hire top 1% developer talent.",
+  title: "Shivam - Elite Web3 Developer | Interactive Terminal Portfolio",
+  description:
+    "🚀 Revolutionary terminal-style portfolio by award-winning Web3 developer. Interactive command-line experience showcasing React, Next.js, and blockchain expertise. Hire top 1% developer talent.",
   keywords: [
     "Web3 Developer",
     "Full Stack Developer",
@@ -26,8 +27,7 @@ export const metadata = {
     "Terminal Portfolio",
     "Frontend Developer",
     "Smart Contracts",
-    "Shivam Nilay",
-    "Award Winning Developer",
+    "Shivam",
     "Gamified Portfolio",
     "Cyberpunk Portfolio",
     "Matrix Portfolio",
@@ -39,19 +39,21 @@ export const metadata = {
     "Bihar Developer",
     "India Developer",
     "Remote Developer",
-    "Freelance Developer"
+    "Freelance Developer",
   ],
   openGraph: {
-    title: "Shivam Nilay - Elite Web3 Developer | Revolutionary Terminal Portfolio",
-    description: "🚀 Experience the future of developer portfolios! Interactive terminal interface with Matrix effects, 3D holographic cards, and gamified skill trees. Award-winning Web3 developer available for hire.",
+    title:
+      "Shivam - Elite Web3 Developer | Revolutionary Terminal Portfolio",
+    description:
+      "🚀 Experience the future of developer portfolios! Interactive terminal interface with Matrix effects, 3D holographic cards, and gamified skill trees. Award-winning Web3 developer available for hire.",
     url: "https://shivamhere.fyi",
-    siteName: "Shivam Nilay - Elite Developer Portfolio",
+    siteName: "Shivam - Elite Developer Portfolio",
     images: [
       {
         url: "/images/portfolio-preview.png",
         width: 1200,
         height: 630,
-        alt: "Shivam Nilay - Interactive Terminal Portfolio Preview",
+        alt: "Shivam - Interactive Terminal Portfolio Preview",
       },
     ],
     locale: "en_US",
@@ -60,7 +62,8 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "🚀 Revolutionary Terminal Portfolio by Elite Web3 Developer",
-    description: "Interactive command-line portfolio with Matrix effects & 3D animations. Award-winning developer showcasing cutting-edge skills. #Web3 #React #NextJS",
+    description:
+      "Interactive command-line portfolio with Matrix effects & 3D animations. Award-winning developer showcasing cutting-edge skills. #Web3 #React #NextJS",
     images: ["/images/portfolio-preview.png"],
     creator: "@shivamnilay",
     site: "@shivamnilay",
@@ -71,9 +74,9 @@ export const metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   verification: {
@@ -85,9 +88,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      {/* ❌ Remove manual <title> and <meta> tags — Next.js will handle them via metadata */}
       <head>
-        <title>Shivam - Web3 Developer Portfolio</title>
-        <meta name="description" content="Frontend + Web3 Specialist" />
         <link rel="preconnect" href="https://api.github.com" />
         <link rel="preconnect" href="https://api.coingecko.com" />
         <link rel="preconnect" href="https://ipapi.co" />
@@ -101,9 +103,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         style={{ overflowX: "hidden", minHeight: "100vh" }}
       >
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
