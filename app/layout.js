@@ -5,11 +5,13 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap", // Faster font loading on mobile
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata = {
@@ -88,20 +90,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      {/* ❌ Remove manual <title> and <meta> tags — Next.js will handle them via metadata */}
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <link rel="preconnect" href="https://api.github.com" />
         <link rel="preconnect" href="https://api.coingecko.com" />
-        <link rel="preconnect" href="https://ipapi.co" />
-        <link rel="preconnect" href="https://wttr.in" />
-        <link rel="dns-prefetch" href="https://api.github.com" />
-        <link rel="dns-prefetch" href="https://api.coingecko.com" />
         <link rel="dns-prefetch" href="https://ipapi.co" />
         <link rel="dns-prefetch" href="https://wttr.in" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        style={{ overflowX: "hidden", minHeight: "100vh" }}
+        style={{ overflowX: "hidden", minHeight: "100vh", width: "100%" }}
       >
         <ThemeProvider>{children}</ThemeProvider>
       </body>
